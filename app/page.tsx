@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-    title: "IT Academy SaaS",
+    title: "IT Academy",
     description:
         "منصة مذاكرة أسرع 10× لدفعتك — مذكرات، فيديوهات شرح، بنك أسئلة، وشهادات PDF.",
 };
@@ -104,17 +104,6 @@ const FULL_FEATURES = [
     "✓ دعم خاص 24/7",
 ] as const;
 
-const FAQS = [
-    {
-        q: "إزاي أسجل في المنصة؟",
-        a: "تقدر تضغط على زر ابدأ مجاناً وتدخل كود الدفعة أو الإيميل الجامعي.",
-    },
-    {
-        q: "هل الفيديوهات بتشتغل علي الموبايل والكمبيوتر؟",
-        a: "نعم، المنصة متجاوبة بالكامل وبتشتغل بسلاسة على كل الأجهزة.",
-    },
-] as const;
-
 /* ------------------------------------------------------------------ */
 /* Page                                                                */
 /* ------------------------------------------------------------------ */
@@ -131,7 +120,6 @@ export default function HomePage() {
                 <Materials />
                 <Testimonials />
                 <Pricing />
-                <Faq />
             </main>
             <SiteFooter />
         </div>
@@ -151,17 +139,11 @@ const NAV_LINKS = [
 
 function SiteHeader() {
     return (
-        <header className="sticky top-0 z-50 mx-auto max-w-[1120px] px-4 py-4 sm:px-6">
-            <div className="mx-auto flex max-w-[1072px] items-center justify-between rounded-2xl border border-[#E5E7EB]/80 bg-white/80 px-6 py-3 shadow-[0_2px_10px_rgba(0,0,0,0.02)] backdrop-blur-md">
+        <header className="sticky top-0 z-50 mx-auto max-w-280 px-4 py-4 sm:px-6">
+            <div className="mx-auto flex max-w-268 items-center justify-between rounded-2xl border border-[#E5E7EB]/80 bg-white/80 px-6 py-3 shadow-[0_2px_10px_rgba(0,0,0,0.02)] backdrop-blur-md">
                 <div className="flex items-center gap-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#5046E5] font-bold text-white shadow-sm">
-                        IT
-                    </div>
                     <span className="text-lg font-bold tracking-tight text-[#111827]">
                         IT Academy{" "}
-                        <span className="rounded-full bg-[#EEF0FF] px-2 py-0.5 text-[10px] font-bold text-[#5046E5]">
-                            SaaS
-                        </span>
                     </span>
                 </div>
 
@@ -202,7 +184,7 @@ function SiteHeader() {
 
 function Hero() {
     return (
-        <section className="mx-auto max-w-[1120px] px-4 pb-16 pt-12 text-center sm:px-6">
+        <section className="mx-auto max-w-280 px-4 pb-16 pt-12 text-center sm:px-6">
             <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#5046E5]/15 bg-[#EEF0FF] px-4 py-1.5 text-xs font-semibold text-[#5046E5]">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#5046E5]"></span>
                 <span>موثوقة من دفعة أولى IT كاملة</span>
@@ -263,7 +245,7 @@ function Hero() {
 
 function HowItWorks() {
     return (
-        <section className="mx-auto max-w-[1120px] px-4 pb-20 sm:px-6">
+        <section className="mx-auto max-w-280 px-4 pb-20 sm:px-6">
             <div className="mx-auto max-w-2xl text-center">
                 <h2 className="text-2xl font-bold tracking-tight text-[#111827] sm:text-3xl">
                     ابدأ المذاكرة في 3 خطوات
@@ -306,7 +288,7 @@ function HowItWorks() {
 
 function Stats() {
     return (
-        <section className="mx-auto max-w-[1120px] px-4 pb-20 sm:px-6">
+        <section className="mx-auto max-w-280 px-4 pb-20 sm:px-6">
             <div className="grid grid-cols-2 gap-6 rounded-2xl border border-[#E5E7EB] bg-white p-8 text-center shadow-sm sm:grid-cols-4">
                 {STATS.map((stat) => (
                     <div key={stat.label}>
@@ -333,7 +315,7 @@ function Stats() {
 function Features() {
     return (
         <section id="features" className="border-t border-[#E5E7EB] bg-white py-20">
-            <div className="mx-auto max-w-[1120px] px-4 text-center sm:px-6">
+            <div className="mx-auto max-w-280 px-4 text-center sm:px-6">
                 <h2 className="mb-4 text-2xl font-bold tracking-tight text-[#111827] sm:text-3xl">
                     مميزات المنصة الدراسية
                 </h2>
@@ -521,40 +503,13 @@ function Pricing() {
 }
 
 /* ------------------------------------------------------------------ */
-/* 9. FAQ                                                              */
-/* ------------------------------------------------------------------ */
-
-function Faq() {
-    return (
-        <section className="border-t border-[#E5E7EB] bg-white py-20">
-            <div className="mx-auto max-w-[900px] px-4 sm:px-6">
-                <h2 className="mb-12 text-center text-2xl font-bold tracking-tight text-[#111827] sm:text-3xl">
-                    أسئلة شائعة
-                </h2>
-                <div className="space-y-4">
-                    {FAQS.map((item) => (
-                        <div
-                            key={item.q}
-                            className="rounded-xl border border-[#E5E7EB] bg-[#F7F7FF] p-5"
-                        >
-                            <h3 className="mb-1 text-sm font-bold text-[#111827]">{item.q}</h3>
-                            <p className="text-xs text-[#6B7280]">{item.a}</p>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
-}
-
-/* ------------------------------------------------------------------ */
 /* 10. Footer                                                          */
 /* ------------------------------------------------------------------ */
 
 function SiteFooter() {
     return (
         <footer className="border-t border-[#E5E7EB] py-10 text-center text-xs text-[#6B7280]">
-            <p>© 2026 IT Academy SaaS. جميع الحقوق محفوظة لدفعتك.</p>
+            <p>© 2026 IT Academy. جميع الحقوق محفوظة لدفعتك.</p>
         </footer>
     );
 }
