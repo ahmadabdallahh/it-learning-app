@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+/* =====================================================================
+   IT Academy Design Tokens (light SaaS)
+   Electric indigo primary on a soft lavender-white canvas.
+   Deep-navy typography, white surfaces, subtle borders and shadows.
+   ===================================================================== */
+
+:root {
+  /* Surfaces */
+  --canvas: #f7f7ff;
+  --surface: #ffffff;
+  --surface-muted: #f4f4f8;
+  --primary-light: #eef0ff;
+  --accent-surface: #e8e9ff;
+
+  /* Ink */
+  --ink: #111827;
+  --ink-soft: #6b7280;
+  --ink-faint: #9ca3af;
+
+  /* Structure */
+  --line: #e5e7eb;
+  --line-strong: #d1d5db;
+
+  /* Accent */
+  --primary: #5046e5;
+  --primary-strong: #4338ca;
+  --primary-soft: #eef0ff;
+  --primary-foreground: #ffffff;
+
+  /* Status */
+  --success: #16a34a;
+  --error: #dc2626;
+
+  /* Elevation */
+  --shadow-card: 0 1px 2px rgb(17 24 39 / 0.04),
+    0 12px 32px -16px rgb(17 24 39 / 0.1);
+  --shadow-lift: 0 1px 2px rgb(17 24 39 / 0.05),
+    0 20px 44px -20px rgb(80 70 229 / 0.28);
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-primary-light: var(--primary-light);
+  --color-accent-surface: var(--accent-surface);
+
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-success: var(--success);
+  --color-error: var(--error);
+
+  /* Type */
+  --font-sans: var(--font-cairo), ui-sans-serif, system-ui, "Segoe UI",
+    Tahoma, sans-serif;
+
+  /* One radius system: cards 16px, controls 12px, chips full */
+  --radius-card: 1rem;
+  --radius-control: 0.75rem;
+
+  --shadow-card: var(--shadow-card);
+  --shadow-lift: var(--shadow-lift);
+
+  /* One easing curve for the whole page */
+  --ease-fluid: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+/* Scroll reveal (driven by IntersectionObserver in a client leaf) */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.8s var(--ease-fluid),
+    transform 0.8s var(--ease-fluid);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Utilities */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
