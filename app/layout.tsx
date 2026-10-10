@@ -16,6 +16,7 @@ import "@fontsource/cairo/latin-600.css";
 import "@fontsource/cairo/latin-700.css";
 import "@fontsource/cairo/latin-800.css";
 import "@fontsource/cairo/latin-900.css";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
     title: "IT Academy — منصة مذاكرة أسرع 10× لدفعتك",
@@ -26,7 +27,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
     return (
         <html lang="ar" dir="rtl" className="h-full antialiased">
-            <body className="flex min-h-full flex-col font-sans">{children}</body>
+            <body className="flex min-h-full flex-col font-sans">
+        <Providers>{children}</Providers>
+      </body>
         </html>
     );
 }

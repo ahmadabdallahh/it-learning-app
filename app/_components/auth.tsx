@@ -96,11 +96,18 @@ export function Field({ label, aside, ...inputProps }: FieldProps) {
   );
 }
 
-export function SubmitButton({ children }: { children: ReactNode }) {
+export function SubmitButton({
+  children,
+  disabled = false,
+}: {
+  children: ReactNode;
+  disabled?: boolean;
+}) {
   return (
     <button
       type="submit"
-      className="mt-2 w-full rounded-xl bg-[#5046E5] py-3 text-sm font-semibold text-white shadow-md shadow-[#5046E5]/20 transition-all hover:bg-[#4338CA]"
+      disabled={disabled}
+      className="mt-2 w-full rounded-xl bg-[#5046E5] py-3 text-sm font-semibold text-white shadow-md shadow-[#5046E5]/20 transition-all hover:bg-[#4338CA] disabled:cursor-not-allowed disabled:opacity-70"
     >
       {children}
     </button>

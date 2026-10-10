@@ -1,47 +1,94 @@
 "use client";
 
+import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
+import { registerUser } from "../lib/auth";
 import {
-  AuthBrandHeader,
-  AuthFooterLink,
-  AuthShell,
-  Field,
-  SubmitButton,
+    AuthBrandHeader,
+    AuthFooterLink,
+    AuthShell,
+    Field,
+    SubmitButton,
 } from "../_components/auth";
 
 export default function RegisterPage() {
-  const router = useRouter();
+    const router = useRouter();
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-  return (
-    <AuthShell>
-      <AuthBrandHeader
-        title="انضم لدفعتك الآن"
-        subtitle="أنشئ حساباً جديداً للوصول الكامل لكل المواد"
-      />
+    const register = useMutation({
+        mutationFn: registerUser,
+        onSuccess: () => router.push("/verify-otp"),
+    });
 
-      {/* Mirrors the prototype's form action="verify-otp.html". */}
-      <form
-        className="space-y-4"
-        onSubmit={(event) => {
-          event.preventDefault();
-          router.push("/verify-otp");
-        }}
-      >
-        <Field label="الاسم الكامل" type="text" placeholder="أحمد محمد" />
-        <Field
-          label="البريد الإلكتروني"
-          type="email"
-          placeholder="name@example.com"
-        />
-        <Field label="كلمة المرور" type="password" placeholder="••••••••" />
-        <SubmitButton>متابعة وإنشاء الحساب</SubmitButton>
-      </form>
+    function handleSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        if (register.isPending) return;
+        register.mutate({ name, email, password });
+    }
 
-      <AuthFooterLink
-        text="لديك حساب بالفعل؟"
-        linkText="سجل دخولك"
-        href="/login"
-      />
-    </AuthShell>
-  );
+    const errorMessage = register.isError ? register.error.message : null;
+
+    return (
+        <AuthShell>
+            <AuthBrandHeader
+                title="انضم لدفعتك الآن"
+                subtitle="أنشئ حساباً جديداً للوصول الكامل لكل المواد"
+            />
+
+            <form className="space-y-4" onSubmit={handleSubmit} noValidate>
+                {errorMessage ? (
+                    <p
+                        role="alert"
+                        className="rounded-xl border border-error/30 bg-error/5 px-4 py-3 text-xs font-semibold leading-relaxed text-error"
+                    >
+                        {errorMessage}
+                    </p>
+                ) : null}
+                <Field
+                    label="الاسم الكامل"
+                    name="name"
+                    type="text"
+                    placeholder="أحمد محمد"
+                    autoComplete="name"
+                    required
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                />
+                <Field
+                    label="البريد الإلكتروني"
+                    name="email"
+                    type="email"
+                    placeholder="name@example.com"
+                    autoComplete="email"
+                    required
+                    value={email}
+                    onChange={(event) => setEmail(event.target.value)}
+                />
+                <Field
+                    label="كلمة المرور"
+                    name="password"
+                    type="password"
+                    placeholder="••••••••"
+                    autoComplete="new-password"
+                    required
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                />
+                <SubmitButton disabled={register.isPending}>
+                    {register.isPending
+                        ? "جاري إنشاء الحساب..."
+                        : "متابعة وإنشاء الحساب"}
+                </SubmitButton>
+            </form>
+
+            <AuthFooterLink
+                text="لديك حساب بالفعل؟"
+                linkText="سجل دخولك"
+                href="/login"
+            />
+        </AuthShell>
+    );
 }
