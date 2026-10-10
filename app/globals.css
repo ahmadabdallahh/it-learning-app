@@ -29,6 +29,10 @@
   --primary-soft: #eef0ff;
   --primary-foreground: #ffffff;
 
+  /* Type (self-hosted Cairo, see app/layout.tsx) */
+  --font-cairo: "Cairo", ui-sans-serif, system-ui, "Segoe UI", Tahoma,
+    sans-serif;
+
   /* Status */
   --success: #16a34a;
   --error: #dc2626;
