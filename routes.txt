@@ -1,0 +1,234 @@
+================================================================================
+                           PLATFORM API - ROUTES
+================================================================================
+Base URL: /api/v1
+Format:   JSON
+Auth:     HTTP-Only Cookie (session)
+
+--------------------------------------------------------------------------------
+HEALTH CHECK
+--------------------------------------------------------------------------------
+GET    /health
+       Description: Basic service liveness health check
+       Auth: None
+
+--------------------------------------------------------------------------------
+AUTHENTICATION (/api/v1/auth)
+--------------------------------------------------------------------------------
+POST   /api/v1/auth/register
+       Description: Register a new user account (student by default)
+       Auth: None
+       Body: { "username": string, "email": string, "password": string }
+
+POST   /api/v1/auth/verify-email
+       Description: Verify user email using the 6-digit OTP code
+       Auth: None
+       Body: { "email": string, "code": string }
+
+POST   /api/v1/auth/resend-verification
+       Description: Resend a new email verification OTP code
+       Auth: None
+       Body: { "email": string }
+
+POST   /api/v1/auth/login
+       Description: Authenticate user, returns session cookie
+       Auth: None
+       Body: { "email": string, "password": string }
+
+POST   /api/v1/auth/logout
+       Description: Revoke current session and clear cookie
+       Auth: Required (Session Cookie)
+
+GET    /api/v1/auth/me
+       Description: Get current authenticated user profile
+       Auth: Required (Session Cookie)
+
+--------------------------------------------------------------------------------
+USERS (/api/v1/users)
+--------------------------------------------------------------------------------
+GET    /api/v1/users
+       Description: List users with pagination and search
+       Auth: Required (Admin only)
+       Query: ?page=1&limit=20&search=keyword
+
+GET    /api/v1/users/:id
+       Description: Get single user profile
+       Auth: Required (Self or Admin)
+
+PATCH  /api/v1/users/:id
+       Description: Update user profile
+       Auth: Required (Self or Admin)
+       Body: { "avatar_url": string (optional) }
+
+DELETE /api/v1/users/:id
+       Description: Delete user account
+       Auth: Required (Admin only)
+
+--------------------------------------------------------------------------------
+CATEGORIES (/api/v1/categories)
+--------------------------------------------------------------------------------
+GET    /api/v1/categories
+       Description: List categories with pagination
+       Auth: None (Public)
+       Query: ?page=1&limit=20
+
+GET    /api/v1/categories/:categoryId
+       Description: Get category details by ID
+       Auth: None (Public)
+
+POST   /api/v1/categories
+       Description: Create a new course category
+       Auth: Required (Admin only)
+       Body: { "name": string, "slug": string (optional), "description": string (optional) }
+
+PATCH  /api/v1/categories/:categoryId
+       Description: Update existing category
+       Auth: Required (Admin only)
+       Body: { "name": string (optional), "slug": string (optional), "description": string (optional) }
+
+DELETE /api/v1/categories/:categoryId
+       Description: Delete category
+       Auth: Required (Admin only)
+
+--------------------------------------------------------------------------------
+COURSES (/api/v1/courses)
+--------------------------------------------------------------------------------
+GET    /api/v1/courses
+       Description: List courses with filtering and pagination
+       Auth: Optional (Public sees published; Instructors see own drafts; Admin sees all)
+       Query: ?search=string&category_id=bigint&instructor_id=bigint&level=beginner|intermediate|advanced&language=string&status=draft|published|archived&page=1&limit=20
+
+GET    /api/v1/courses/:courseId
+       Description: Get course details
+       Auth: Optional (Public sees published; Instructor sees own; Admin sees all)
+
+POST   /api/v1/courses
+       Description: Create a new course
+       Auth: Required (Instructor or Admin)
+       Body: {
+         "title": string,
+         "description": string (optional),
+         "category_id": string (optional),
+         "thumbnail_url": string (optional),
+         "price": number (optional, default: 0),
+         "currency": string (optional, default: "USD"),
+         "level": "beginner" | "intermediate" | "advanced" (optional, default: "beginner"),
+         "language": string (optional, default: "English"),
+         "status": "draft" | "published" | "archived" (optional, default: "draft"),
+         "instructor_id": string (optional, Admin only)
+       }
+
+PATCH  /api/v1/courses/:courseId
+       Description: Update course
+       Auth: Required (Course Instructor Owner or Admin)
+       Body: {
+         "title": string (optional),
+         "description": string (optional),
+         "category_id": string (optional),
+         "thumbnail_url": string (optional),
+         "price": number (optional),
+         "currency": string (optional),
+         "level": string (optional),
+         "language": string (optional),
+         "status": string (optional)
+       }
+
+DELETE /api/v1/courses/:courseId
+       Description: Delete course
+       Auth: Required (Course Instructor Owner or Admin)
+
+--------------------------------------------------------------------------------
+SECTIONS (/api/v1/courses/:courseId/sections & /api/v1/sections)
+--------------------------------------------------------------------------------
+GET    /api/v1/courses/:courseId/sections
+       Description: Get all sections for a course
+       Auth: Optional (Public for published courses; Instructor Owner or Admin)
+
+POST   /api/v1/courses/:courseId/sections
+       Description: Create a new section in a course
+       Auth: Required (Course Instructor Owner or Admin)
+       Body: { "title": string, "description": string (optional), "position": number (optional, default: 0) }
+
+PATCH  /api/v1/sections/:sectionId
+       Description: Update section
+       Auth: Required (Course Instructor Owner or Admin)
+       Body: { "title": string (optional), "description": string (optional), "position": number (optional) }
+
+DELETE /api/v1/sections/:sectionId
+       Description: Delete section
+       Auth: Required (Course Instructor Owner or Admin)
+
+--------------------------------------------------------------------------------
+LESSONS (/api/v1/sections/:sectionId/lessons & /api/v1/lessons)
+--------------------------------------------------------------------------------
+GET    /api/v1/sections/:sectionId/lessons
+       Description: Get all lessons for a section
+       Auth: Optional (Public for published courses; Instructor Owner or Admin)
+
+POST   /api/v1/sections/:sectionId/lessons
+       Description: Create a new lesson in a section
+       Auth: Required (Course Instructor Owner or Admin)
+       Body: {
+         "title": string,
+         "description": string (optional),
+         "video_url": string (optional),
+         "duration_seconds": number (optional, default: 0),
+         "position": number (optional, default: 0),
+         "is_free_preview": boolean (optional, default: false)
+       }
+
+GET    /api/v1/lessons/:lessonId
+       Description: View lesson content
+       Auth: Optional for is_free_preview=true; Required + Enrolled for non-preview lessons
+
+PATCH  /api/v1/lessons/:lessonId
+       Description: Update lesson
+       Auth: Required (Course Instructor Owner or Admin)
+       Body: {
+         "title": string (optional),
+         "description": string (optional),
+         "video_url": string (optional),
+         "duration_seconds": number (optional),
+         "position": number (optional),
+         "is_free_preview": boolean (optional)
+       }
+
+DELETE /api/v1/lessons/:lessonId
+       Description: Delete lesson
+       Auth: Required (Course Instructor Owner or Admin)
+
+--------------------------------------------------------------------------------
+ENROLLMENTS (/api/v1/courses/:courseId/enroll, enrollment, /api/v1/me/courses)
+--------------------------------------------------------------------------------
+POST   /api/v1/courses/:courseId/enroll
+       Description: Enroll in a course (Free courses activate immediately; Paid courses return 402 Payment Required)
+       Auth: Required (Student / Any authenticated user)
+
+GET    /api/v1/courses/:courseId/enrollment
+       Description: Get current user's enrollment details for a specific course
+       Auth: Required (Enrolled User)
+
+GET    /api/v1/me/courses
+       Description: List all courses the current user is enrolled in
+       Auth: Required (Authenticated User)
+       Query: ?page=1&limit=20
+
+--------------------------------------------------------------------------------
+PROGRESS (/api/v1/courses/:courseId/progress & /api/v1/lessons/:lessonId/...)
+--------------------------------------------------------------------------------
+GET    /api/v1/courses/:courseId/progress
+       Description: Get aggregated course progress (total lessons, completed, percentage, watched seconds)
+       Auth: Required (Enrolled Student)
+
+GET    /api/v1/lessons/:lessonId/progress
+       Description: Get watch progress for a single lesson
+       Auth: Required (Enrolled Student)
+
+PUT    /api/v1/lessons/:lessonId/progress
+       Description: Upsert watch progress for a lesson
+       Auth: Required (Enrolled Student)
+       Body: { "watched_seconds": number, "completed": boolean (optional) }
+
+POST   /api/v1/lessons/:lessonId/complete
+       Description: Mark a lesson as completed (auto-completes course if all lessons done)
+       Auth: Required (Enrolled Student)

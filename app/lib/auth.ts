@@ -1,11 +1,28 @@
 export type RegisterPayload = {
-    name: string;
+    username: string;
     email: string;
     password: string;
 };
 
 export type RegisterResponse = {
-    user: { id: string; name: string; email: string };
+    user: { id: string; username: string; email: string };
+};
+
+export type VerifyEmailPayload = {
+    email: string;
+    code: string;
+};
+
+export type VerifyEmailResponse = {
+    verified: boolean;
+};
+
+export type ResendVerificationPayload = {
+    email: string;
+};
+
+export type ResendVerificationResponse = {
+    sent: boolean;
 };
 
 type ApiErrorPayload = {
@@ -14,19 +31,17 @@ type ApiErrorPayload = {
 };
 
 /**
- * Creates an account via POST /api/register.
+ * Shared POST helper for the same-origin /api/v1 JSON endpoints.
  * Throws an Error carrying the server's Arabic message on failure,
  * so TanStack Query's `mutation.error.message` is render-ready.
  */
-export async function registerUser(
-    payload: RegisterPayload,
-): Promise<RegisterResponse> {
+async function postJson<T>(path: string, body: unknown): Promise<T> {
     let response: Response;
     try {
-        response = await fetch("/api/register", {
+        response = await fetch(path, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
+            body: JSON.stringify(body),
         });
     } catch {
         throw new Error(
@@ -39,9 +54,30 @@ export async function registerUser(
             .json()
             .catch(() => null)) as ApiErrorPayload | null;
         throw new Error(
-            data?.message ?? "حدث خطأ أثناء إنشاء الحساب، حاول مرة أخرى.",
+            data?.message ?? "حدث خطأ غير متوقع، حاول مرة أخرى.",
         );
     }
 
-    return (await response.json()) as RegisterResponse;
+    return (await response.json()) as T;
+}
+
+export function registerUser(
+    payload: RegisterPayload,
+): Promise<RegisterResponse> {
+    return postJson<RegisterResponse>("/api/v1/auth/register", payload);
+}
+
+export function verifyEmail(
+    payload: VerifyEmailPayload,
+): Promise<VerifyEmailResponse> {
+    return postJson<VerifyEmailResponse>("/api/v1/auth/verify-email", payload);
+}
+
+export function resendVerification(
+    payload: ResendVerificationPayload,
+): Promise<ResendVerificationResponse> {
+    return postJson<ResendVerificationResponse>(
+        "/api/v1/auth/resend-verification",
+        payload,
+    );
 }

@@ -14,19 +14,22 @@ import {
 
 export default function RegisterPage() {
     const router = useRouter();
-    const [name, setName] = useState("");
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const register = useMutation({
         mutationFn: registerUser,
-        onSuccess: () => router.push("/verify-otp"),
+        onSuccess: (_data, variables) =>
+            router.push(
+                `/verify-otp?email=${encodeURIComponent(variables.email)}`,
+            ),
     });
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
         if (register.isPending) return;
-        register.mutate({ name, email, password });
+        register.mutate({ username, email, password });
     }
 
     const errorMessage = register.isError ? register.error.message : null;
@@ -49,13 +52,13 @@ export default function RegisterPage() {
                 ) : null}
                 <Field
                     label="الاسم الكامل"
-                    name="name"
+                    name="username"
                     type="text"
                     placeholder="أحمد محمد"
-                    autoComplete="name"
+                    autoComplete="username"
                     required
-                    value={name}
-                    onChange={(event) => setName(event.target.value)}
+                    value={username}
+                    onChange={(event) => setUsername(event.target.value)}
                 />
                 <Field
                     label="البريد الإلكتروني"
