@@ -1,108 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-    BookOpen,
-    GraduationCap,
-    MessageCircle,
-    MonitorPlay,
-    Trophy,
-    UserPlus,
-} from "lucide-react";
+    FEATURES,
+    HOW_IT_WORKS,
+    MATERIALS,
+    NAV_LINKS,
+    STATS,
+    TESTIMONIALS,
+    VALUE_CARDS,
+} from "./consts";
 
 export const metadata: Metadata = {
     title: "IT Academy",
     description:
         "منصة مذاكرة أسرع 10× لدفعتك — مذكرات، فيديوهات شرح، بنك أسئلة، وشهادات PDF.",
 };
-
-/* ------------------------------------------------------------------ */
-/* Data (content copied verbatim from the approved home.html)          */
-/* ------------------------------------------------------------------ */
-
-const VALUE_CARDS = [
-    { icon: MessageCircle, title: "دعم 24/7", desc: "واتساب الدفعة الفوري" },
-    { icon: GraduationCap, title: "شهادة PDF", desc: "توليد فوري معتمد" },
-    { icon: MonitorPlay, title: "شرح YouTube خاص", desc: "محتوى آمن للدفعة فقط" },
-    { icon: BookOpen, title: "100% منهج الكلية", desc: "مذكرات + فيديوهات شرح" },
-] as const;
-
-const HOW_IT_WORKS = [
-    {
-        icon: UserPlus,
-        step: "خطوة 1",
-        title: "أنشئ حسابك",
-        desc: "سجل بالإيميل الجامعي أو كود الدفعة في أقل من دقيقة.",
-    },
-    {
-        icon: BookOpen,
-        step: "خطوة 2",
-        title: "اختر مادتك",
-        desc: "افتح المادة وشوف المحاضرات والملخصات والشيتات.",
-    },
-    {
-        icon: Trophy,
-        step: "خطوة 3",
-        title: "ذاكر وتفوق",
-        desc: "حل بنك الأسئلة وولّد شهادتك بعد إتمام المادة.",
-    },
-] as const;
-
-const STATS = [
-    { value: "+2000", label: "طالب بيذاكر معانا" },
-    { value: "+300", label: "فيديو شرح للدفعة" },
-    { value: "+5000", label: "سؤال وإجابة نموذجية" },
-    { value: "98%", label: "نسبة رضا الدفعة" },
-] as const;
-
-const FEATURES = [
-    {
-        step: "01",
-        title: "سرعة فائقة وتصفح سلس",
-        desc: "تصفح المحاضرات والملخصات بدون أي تقطيع أو إعلانات مزعجة.",
-    },
-    {
-        step: "02",
-        title: "تحديثات دقيقة أول بأول",
-        desc: "المحتوى بيتحدث فوراً مع كل دكتور وكل تنبيه ينزل في السكشن.",
-    },
-    {
-        step: "03",
-        title: "بنك اسئلة الامتحانات السابقة",
-        desc: "أسئلة سنين فاتت مرتبة ومنسقة مع إضافات حلول نموذجية.",
-    },
-] as const;
-
-const MATERIALS = [
-    { title: "الذكاء الاصطناعي وهياكل البيانات" },
-    { title: "شبكات الحاسب المتقدمة" },
-    { title: "تطوير الويب الحديث" },
-] as const;
-
-const TESTIMONIALS = [
-    {
-        quote:
-            '"الموقع ريحنا خالص الترم ده، الشرح منظم والملخصات بتنزل في وقتها قبل الامتحانات بيومين."',
-        name: "محمود أحمد",
-        level: "فرقة ثالثة IT",
-    },
-    {
-        quote:
-            '"أفضل منصة استخدمتها في الكلية، الدعم سريع جداً وبتوفر وقت ضخم جداً في المذاكرة."',
-        name: "سارة محمد",
-        level: "فرقة تانية IT",
-    },
-] as const;
-
-const FREE_FEATURES = [
-    "✓ مواد الأسبوع الأول والثاني",
-    "✓ دعم عام عبر جروب الدفعة",
-] as const;
-
-const FULL_FEATURES = [
-    "✓ كل المهارات والمواد والملخصات",
-    "✓ شهادات معتمدة فورية",
-    "✓ دعم خاص 24/7",
-] as const;
 
 /* ------------------------------------------------------------------ */
 /* Page                                                                */
@@ -129,13 +41,6 @@ export default function HomePage() {
 /* ------------------------------------------------------------------ */
 /* 1. Navigation                                                       */
 /* ------------------------------------------------------------------ */
-
-const NAV_LINKS = [
-    { href: "#features", label: "المميزات" },
-    { href: "#materials", label: "المواد" },
-    { href: "#testimonials", label: "آراء الطلاب" },
-    { href: "#pricing", label: "الأسعار" },
-] as const;
 
 function SiteHeader() {
     return (
@@ -350,7 +255,7 @@ function Features() {
 
 function Materials() {
     return (
-        <section id="materials" className="mx-auto max-w-[1120px] px-4 py-20 sm:px-6">
+        <section id="materials" className="mx-auto max-w-280 px-4 py-20 sm:px-6">
             <div className="mb-12 flex items-end justify-between">
                 <div>
                     <h2 className="mb-2 text-2xl font-bold tracking-tight text-[#111827] sm:text-3xl">
@@ -405,25 +310,50 @@ function Testimonials() {
     return (
         <section
             id="testimonials"
-            className="border-t border-[#E5E7EB] bg-white py-20"
+            className="border-t border-[#E5E7EB] bg-white py-20 relative overflow-hidden"
         >
-            <div className="mx-auto max-w-[1120px] px-4 text-center sm:px-6">
-                <h2 className="mb-12 text-2xl font-bold tracking-tight text-[#111827] sm:text-3xl">
-                    رأي دُفعتنا في المنصة
-                </h2>
-                <div className="grid grid-cols-1 gap-6 text-right md:grid-cols-2">
+            <div className="mx-auto max-w-280 px-4 text-center sm:px-6">
+
+                {/* Heading & Subtitle */}
+                <div className="mb-14">
+                    <span className="text-xs bg-[#EEF0FF] text-[#5046E5] font-semibold px-3 py-1 rounded-full mb-3 inline-block">آراء الطلاب</span>
+                    <h2 className="text-2xl font-black tracking-tight text-[#111827] sm:text-3xl">
+                        رأي دُفعتنا في المنصة
+                    </h2>
+                    <p className="text-sm text-[#6B7280] mt-2">قصص نجاح حقيقية من طلاب بيستفيدوا من المنصة كل يوم</p>
+                </div>
+
+                {/* Grid */}
+                <div className="grid grid-cols-1 gap-8 text-right md:grid-cols-2">
                     {TESTIMONIALS.map((item) => (
                         <div
                             key={item.name}
-                            className="rounded-2xl border border-[#E5E7EB] bg-[#F7F7FF] p-6"
+                            className="relative rounded-3xl border border-[#E5E7EB] bg-[#F7F7FF] p-8 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between"
                         >
-                            <p className="mb-4 text-sm leading-relaxed text-[#111827]">
-                                {item.quote}
-                            </p>
-                            <span className="block text-sm font-bold text-[#111827]">
-                                {item.name}
-                            </span>
-                            <span className="text-xs text-[#6B7280]">{item.level}</span>
+                            <div>
+                                {/* Rating Stars */}
+                                <div className="flex gap-1 mb-4 text-amber-400 text-sm">
+                                    {[...Array(item.rating)].map((_, i) => (
+                                        <span key={i}>★</span>
+                                    ))}
+                                </div>
+
+                                <p className="mb-6 text-sm sm:text-base leading-relaxed text-[#111827] font-medium">
+                                    &quot;{item.quote}&quot;
+                                </p>
+                            </div>
+
+                            <div className="flex items-center gap-3 pt-4 border-t border-[#E5E7EB]/60">
+                                <div className="w-10 h-10 rounded-full bg-[#5046E5] text-white font-bold flex items-center justify-center text-sm shadow-sm">
+                                    {item.name.charAt(0)}
+                                </div>
+                                <div>
+                                    <span className="block text-sm font-bold text-[#111827]">
+                                        {item.name}
+                                    </span>
+                                    <span className="text-xs text-[#6B7280] font-medium">{item.level}</span>
+                                </div>
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -438,67 +368,118 @@ function Testimonials() {
 
 function Pricing() {
     return (
-        <section
-            id="pricing"
-            className="mx-auto max-w-[1120px] px-4 py-20 text-center sm:px-6"
-        >
-            <h2 className="mb-4 text-2xl font-bold tracking-tight text-[#111827] sm:text-3xl">
-                باقات الأسعار للدفعة
-            </h2>
-            <p className="mx-auto mb-12 max-w-xl text-sm text-[#6B7280] sm:text-base">
-                أسعار رمزية ومناسبة للجميع عشان الكل يتفوق
-            </p>
-            <div className="mx-auto grid max-w-3xl grid-cols-1 gap-6 text-right md:grid-cols-2">
-                <div className="flex flex-col justify-between rounded-2xl border border-[#E5E7EB] bg-white p-8 shadow-sm">
+        <div className="max-w-6xl w-full mx-auto text-center py-12">
+
+            {/* Header & Subtitle */}
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight mb-3">اختر الباقة اللي تناسبك</h2>
+            <p className="text-sm sm:text-base text-[#6B7280] mb-8 font-medium">ابداً مجاناً، ورقي وقت ما تحتاج. كل الباقات المدفوعة بضمان استرداد 14 يوم.</p>
+
+            {/* Toggle Switch (ترم واحد / السنة كاملة) */}
+            <div className="inline-flex items-center bg-[#111827] p-1.5 rounded-full mb-16 shadow-md">
+                <button className="bg-[#5046E5] text-white text-xs sm:text-sm font-bold px-6 py-2 rounded-full transition-all">
+                    ترم واحد
+                </button>
+                <button className="text-slate-400 hover:text-white text-xs sm:text-sm font-bold px-6 py-2 rounded-full transition-all flex items-center gap-1.5">
+                    السنة كاملة <span className="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-bold">-25%</span>
+                </button>
+            </div>
+
+            {/* Pricing Cards Grid (3 Cards) */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center text-right">
+
+                {/* 1. باقة المجموعات (اليسار) */}
+                <div className="bg-white p-8 rounded-3xl border border-[#E5E7EB] shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
                     <div>
-                        <h3 className="mb-2 text-lg font-bold text-[#111827]">
-                            الباقة المجانية
-                        </h3>
-                        <p className="mb-6 text-xs text-[#6B7280]">
-                            تجربة محتوى أول أسبوعين
-                        </p>
-                        <div className="mb-6 text-3xl font-bold text-[#111827]">0 جنية</div>
-                        <ul className="mb-8 space-y-3 text-sm text-[#6B7280]">
-                            {FREE_FEATURES.map((feature) => (
-                                <li key={feature}>{feature}</li>
-                            ))}
+                        <h3 className="font-bold text-lg mb-1 text-[#111827]">مجموعات</h3>
+                        <p className="text-xs text-[#6B7280] mb-6 font-medium">انت وصحابك — أوفر بكتير</p>
+
+                        <div className="flex items-baseline gap-1 mb-1">
+                            <span className="text-4xl font-black tracking-tight">99</span>
+                            <span className="text-xs font-bold text-[#6B7280]">جنية / للفرد</span>
+                        </div>
+                        <p className="text-[11px] text-[#6B7280] mb-8 font-medium">من 3 أفراد فأكثر</p>
+
+                        <ul className="text-xs sm:text-sm text-[#111827] space-y-3.5 mb-8 font-medium">
+                            <li className="flex items-center gap-2"><span className="text-emerald-600 font-bold">✓</span> كل مميزات PRO</li>
+                            <li className="flex items-center gap-2"><span className="text-emerald-600 font-bold">✓</span> جروب خاص بشلتك</li>
+                            <li className="flex items-center gap-2"><span className="text-emerald-600 font-bold">✓</span> تحدي أسبوعي + جوائز</li>
+                            <li className="flex items-center gap-2"><span className="text-emerald-600 font-bold">✓</span> متابعة ولي الأمر (اختياري)</li>
                         </ul>
                     </div>
-                    <Link
-                        href="/register"
-                        className="w-full rounded-xl bg-[#F7F7FF] py-3 text-center font-medium text-[#111827] transition-colors hover:bg-slate-100"
-                    >
-                        ابدأ مجاناً
-                    </Link>
+                    <button className="w-full bg-[#111827] hover:bg-slate-800 text-white font-bold py-3.5 rounded-xl transition-colors text-sm shadow-sm">
+                        كون مجموعتك
+                    </button>
                 </div>
 
-                <div className="relative flex flex-col justify-between overflow-hidden rounded-2xl bg-[#111827] p-8 text-white shadow-xl">
-                    <div className="absolute left-4 top-4 rounded-full bg-[#5046E5] px-2.5 py-1 text-[10px] font-bold text-white">
-                        الأكثر طلباً
+                {/* 2. الدفعة PRO (المنتصف - البارز والملون) */}
+                <div className="bg-[#5046E5] text-white p-8 rounded-3xl shadow-2xl flex flex-col justify-between relative overflow-hidden transform lg:-translate-y-4 border border-indigo-400/30">
+                    <div className="absolute top-4 left-4 bg-amber-400 text-slate-900 text-[10px] px-3 py-1 rounded-full font-black shadow-md">
+                        الأكثر اشتراكاً ★
                     </div>
-                    <div>
-                        <h3 className="mb-2 text-lg font-bold">باقة الدفعة الكاملة</h3>
-                        <p className="mb-6 text-xs text-slate-400">
-                            وصول كامل لكل الترمات والمواد
-                        </p>
-                        <div className="mb-6 text-3xl font-bold text-[#5046E5]">
-                            متاحة الآن
+
+                    <div className="pt-2">
+                        <h3 className="font-bold text-lg mb-1 text-white">الدفعة PRO</h3>
+                        <p className="text-xs text-indigo-100 mb-6 font-medium">كل حاجة + أولويـة الدعم</p>
+
+                        <div className="flex items-baseline gap-2 mb-1">
+                            <span className="text-5xl font-black tracking-tight">149</span>
+                            <div className="text-right">
+                                <span className="text-xs line-through text-indigo-200 block">249</span>
+                                <span className="text-xs font-bold text-indigo-100">جنية / ترم</span>
+                            </div>
                         </div>
-                        <ul className="mb-8 space-y-3 text-sm text-slate-300">
-                            {FULL_FEATURES.map((feature) => (
-                                <li key={feature}>{feature}</li>
-                            ))}
+                        <p className="text-[11px] text-indigo-200 mb-8 font-medium">أقل من 1 جنيه في اليوم • ضمان 14 يوم</p>
+
+                        <ul className="text-xs sm:text-sm text-white space-y-3.5 mb-8 font-medium">
+                            <li className="flex items-center gap-2"><span className="text-amber-300 font-bold">✓</span> كل المواد الـ 6 كاملة</li>
+                            <li className="flex items-center gap-2"><span className="text-amber-300 font-bold">✓</span> بنك 3,500+ سؤال بالشرح</li>
+                            <li className="flex items-center gap-2"><span className="text-amber-300 font-bold">✓</span> 20 امتحان تجريبي بتصحيح فوري</li>
+                            <li className="flex items-center gap-2"><span className="text-amber-300 font-bold">✓</span> مذكرات PDF + خطط مذاكرة</li>
+                            <li className="flex items-center gap-2"><span className="text-amber-300 font-bold">✓</span> جروب الدفعة + دعم ليلة الامتحان</li>
                         </ul>
                     </div>
-                    <Link
-                        href="/register"
-                        className="w-full rounded-xl bg-[#5046E5] py-3 text-center font-medium text-white transition-colors hover:bg-[#4338CA]"
-                    >
-                        اشترك الآن
-                    </Link>
+
+                    <div>
+                        <button className="w-full bg-white hover:bg-slate-100 text-[#5046E5] font-black py-3.5 rounded-xl transition-all text-sm shadow-lg mb-3">
+                            اشترك في PRO ←
+                        </button>
+                        <span className="text-[11px] text-indigo-200 block font-medium">انضم لـ 620 طالب PRO هذا الترم</span>
+                    </div>
                 </div>
+
+                {/* 3. الباقة المجانية (اليمين) */}
+                <div className="bg-white p-8 rounded-3xl border border-[#E5E7EB] shadow-sm flex flex-col justify-between hover:shadow-md transition-all">
+                    <div>
+                        <h3 className="font-bold text-lg mb-1 text-[#111827]">مجاني</h3>
+                        <p className="text-xs text-[#6B7280] mb-6 font-medium">جرب قبل ما تدفع</p>
+
+                        <div className="flex items-baseline gap-1 mb-1">
+                            <span className="text-4xl font-black tracking-tight">0</span>
+                            <span className="text-xs font-bold text-[#6B7280]">جنية</span>
+                        </div>
+                        <p className="text-[11px] text-[#6B7280] mb-8 font-medium">مجاني للأبد</p>
+
+                        <ul className="text-xs sm:text-sm text-[#111827] space-y-3.5 mb-8 font-medium">
+                            <li className="flex items-center gap-2"><span className="text-emerald-600 font-bold">✓</span> 3 دروس من كل مادة</li>
+                            <li className="flex items-center gap-2"><span className="text-emerald-600 font-bold">✓</span> 100 سؤال بنك الأسئلة</li>
+                            <li className="flex items-center gap-2"><span className="text-emerald-600 font-bold">✓</span> امتحان تجريبي واحد</li>
+                            <li className="flex items-center gap-2 text-slate-300"><span className="text-slate-300">✕</span> ملخصات PDF للتحميل</li>
+                            <li className="flex items-center gap-2 text-slate-300"><span className="text-slate-300">✕</span> خطط مذاكرة مخصصة</li>
+                        </ul>
+                    </div>
+                    <button className="w-full bg-white border border-[#E5E7EB] text-[#111827] hover:bg-slate-50 font-bold py-3.5 rounded-xl transition-colors text-sm shadow-sm">
+                        ابدأ مجاناً
+                    </button>
+                </div>
+
             </div>
-        </section>
+
+            {/* Footer Payment Methods Note */}
+            <div className="mt-16 text-center text-xs text-[#6B7280] font-medium tracking-wide">
+                <span>دفع آمن بـ فودافون كاش</span> • <span>انستاباي</span> • <span>بطاقات بنكية</span> • <span>فاتورة رسمية للجامعة عند الطلب</span>
+            </div>
+
+        </div>
     );
 }
 
@@ -509,7 +490,7 @@ function Pricing() {
 function SiteFooter() {
     return (
         <footer className="border-t border-[#E5E7EB] py-10 text-center text-xs text-[#6B7280]">
-            <p>© 2026 IT Academy. جميع الحقوق محفوظة لدفعتك.</p>
+            <p>© {new Date().getFullYear()} IT Academy. جميع الحقوق محفوظة لدفعتك.</p>
         </footer>
     );
 }
