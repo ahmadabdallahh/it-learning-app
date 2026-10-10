@@ -37,6 +37,7 @@ export type Feature = {
 /** Study material card. */
 export type Material = {
     title: string;
+    icon: LucideIcon;
 };
 
 /** Student testimonial with a star rating. */

@@ -1,8 +1,11 @@
 import {
     BookOpen,
+    Cpu,
+    Globe,
     GraduationCap,
     MessageCircle,
     MonitorPlay,
+    Network,
     Trophy,
     UserPlus,
 } from "lucide-react";
@@ -81,9 +84,9 @@ export const FEATURES: Feature[] = [
 ];
 
 export const MATERIALS: Material[] = [
-    { title: "الذكاء الاصطناعي وهياكل البيانات" },
-    { title: "شبكات الحاسب المتقدمة" },
-    { title: "تطوير الويب الحديث" },
+    { title: "الذكاء الاصطناعي وهياكل البيانات", icon: Cpu },
+    { title: "شبكات الحاسب المتقدمة", icon: Network },
+    { title: "تطوير الويب الحديث", icon: Globe },
 ];
 
 export const TESTIMONIALS: Testimonial[] = [
