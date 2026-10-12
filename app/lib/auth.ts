@@ -101,11 +101,24 @@ type ApiErrorPayload = {
     error?: { code?: string; message?: string };
 };
 
+/** Arabic copy for stable backend error codes (observed live).
+   Unknown codes fall through to the backend message, then the fallback. */
+const ERROR_CODE_MESSAGES: Record<string, string> = {
+    INVALID_CODE: "كود التحقق غير صحيح، تأكد من الكود وحاول مرة أخرى.",
+    EMAIL_NOT_VERIFIED:
+        "لم يتم تفعيل بريدك بعد، أدخل كود التحقق المرسل إلى بريدك.",
+    INVALID_CREDENTIALS: "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+    USER_NOT_FOUND: "لا يوجد حساب بهذا البريد، أنشئ حساباً جديداً.",
+    VALIDATION_ERROR: "بيانات غير صالحة، راجع الحقول وحاول مرة أخرى.",
+};
+
 /** Prefer the backend's own message, whatever envelope it arrives in. */
 function apiErrorMessage(
     data: ApiErrorPayload | null,
     fallback: string,
 ): string {
+    const code = data?.error?.code;
+    if (code && ERROR_CODE_MESSAGES[code]) return ERROR_CODE_MESSAGES[code];
     return data?.message ?? data?.error?.message ?? fallback;
 }
 
