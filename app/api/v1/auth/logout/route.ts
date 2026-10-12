@@ -7,9 +7,10 @@ export async function POST() {
 
     let backendResponse: Response;
     try {
+        // routes.txt specifies no body for logout: session travels
+        // in the cookie alone.
         backendResponse = await proxyToBackend("auth/logout", {
             method: "POST",
-            body: {},
             cookieHeader,
         });
     } catch (error) {

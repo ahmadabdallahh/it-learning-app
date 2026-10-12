@@ -19,6 +19,42 @@ export type User = {
     role: Role;
 };
 
+const KNOWN_ROLES: Role[] = ["student", "instructor", "admin"];
+
+function normalizeRole(value: unknown): Role {
+    return KNOWN_ROLES.includes(value as Role)
+        ? (value as Role)
+        : "student";
+}
+
+/**
+ * Pull the session profile out of a /me payload regardless of envelope.
+ * routes.txt pins the request shape but not the response envelope, and
+ * the live backend wraps payloads ({ status, success, data | error }),
+ * so accept a bare { user } as well as { data: { user } }.
+ */
+export function extractSessionUser(payload: unknown): User | null {
+    if (typeof payload !== "object" || payload === null) return null;
+    const record = payload as Record<string, unknown>;
+    const raw =
+        record.user ??
+        (typeof record.data === "object" && record.data !== null
+            ? (record.data as Record<string, unknown>).user
+            : undefined);
+    if (typeof raw !== "object" || raw === null) return null;
+    const candidate = raw as Record<string, unknown>;
+    if (typeof candidate.email !== "string") return null;
+    return {
+        id: String(candidate.id ?? ""),
+        username:
+            typeof candidate.username === "string" && candidate.username
+                ? candidate.username
+                : candidate.email,
+        email: candidate.email,
+        role: normalizeRole(candidate.role),
+    };
+}
+
 export type LoginPayload = {
     email: string;
     password: string;
@@ -144,8 +180,11 @@ export function logoutUser(): Promise<{ ok: boolean }> {
 }
 
 /** Current session user (HTTP-only cookie). Throws on 401. */
-export function getCurrentUser(): Promise<{ user: User }> {
-    return getJson<{ user: User }>("/api/v1/auth/me");
+export async function getCurrentUser(): Promise<{ user: User }> {
+    const payload = await getJson<unknown>("/api/v1/auth/me");
+    const user = extractSessionUser(payload);
+    if (!user) throw new Error("تعذّر قراءة بيانات الجلسة، سجل الدخول مرة أخرى.");
+    return { user };
 }
 
 export function verifyEmail(
