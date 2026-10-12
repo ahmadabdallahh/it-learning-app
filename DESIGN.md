@@ -171,7 +171,7 @@ components:
 - **Stats band.** Bare, no card: 2×2 → 4-up with hairline dividers, numbers in heavy Cairo with soft-ink labels.
 - **Steps.** Three icon circles joined by a hairline, 600-weight Arabic action labels ("جهّز حسابك" → "شوف المحتوى" → "ذاكر وخلص").
 - **Billing toggle.** One pill switch (`bg-ink`, `p-1.5`) with two full segments; the pressed segment turns solid indigo with white text, `aria-pressed` per segment — billed as "شهري / سنوي".
-- **Inputs.** Text fields and OTP digit boxes sit on `bg-canvas/50` over the white card with a hairline border; the indigo border marks focus. Radius is `rounded-control` (12px), padding `12px 16px`.
+- **Inputs.** Text fields and OTP digit boxes sit on `bg-canvas/50` over the white card with a hairline border; the indigo border marks focus. Radius is `rounded-control` (12px), padding `12px 16px`. Password fields carry an eye reveal toggle at the inline-end (`aria-pressed`, Arabic show/hide labels).
 - **Alerts.** One inline status block shared by the auth helpers: error (red hairline/tint/text) or success (green), with `role="alert"` / `role="status"` assigned by variant.
 - **Navigation.** A floating glass shell — `rounded-card`, `bg-surface/80`, `backdrop-blur-md`, `shadow-card`, sticky at top — with soft-ink links that turn indigo on hover and a compact dark "دخول" pill.
 - **Dashboard shell.** Authenticated pages reuse the same tokens: sidebar (`bg-surface`, hairline `border-e`, active link on `indigo-soft`), role badge pill, account summary card, and a static skeleton fallback with identical geometry streamed while the session gate resolves.

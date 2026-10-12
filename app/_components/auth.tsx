@@ -1,6 +1,8 @@
-import { useId, type InputHTMLAttributes, type ReactNode } from "react";
+"use client";
+
+import { useId, useState, type InputHTMLAttributes, type ReactNode } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Eye, EyeOff } from "lucide-react";
 
 /* Shared shell + controls for the auth pages (login / register / verify-otp /
    forget-password). Every value consumes the design tokens from
@@ -108,8 +110,11 @@ type FieldProps = InputHTMLAttributes<HTMLInputElement> & {
   aside?: ReactNode;
 };
 
-export function Field({ label, aside, ...inputProps }: FieldProps) {
+export function Field({ label, aside, type, ...inputProps }: FieldProps) {
   const fieldId = useId();
+  const [visible, setVisible] = useState(false);
+  // Password fields get a reveal toggle; anything else renders plain.
+  const isPassword = type === "password";
   return (
     <div>
       {aside ? (
@@ -130,11 +135,32 @@ export function Field({ label, aside, ...inputProps }: FieldProps) {
           {label}
         </label>
       )}
-      <input
-        id={fieldId}
-        {...inputProps}
-        className="w-full rounded-control border border-line bg-canvas/50 px-4 py-3 text-sm focus:border-primary focus:outline-none"
-      />
+      <div className={isPassword ? "relative" : undefined}>
+        <input
+          id={fieldId}
+          type={isPassword ? (visible ? "text" : "password") : type}
+          {...inputProps}
+          className={`w-full rounded-control border border-line bg-canvas/50 px-4 py-3 text-sm focus:border-primary focus:outline-none ${
+            isPassword ? "pe-11" : ""
+          }`}
+        />
+        {isPassword ? (
+          <button
+            type="button"
+            onClick={() => setVisible((value) => !value)}
+            aria-pressed={visible}
+            aria-label={visible ? "إخفاء كلمة المرور" : "إظهار كلمة المرور"}
+            title={visible ? "إخفاء كلمة المرور" : "إظهار كلمة المرور"}
+            className="absolute end-3 top-1/2 -translate-y-1/2 text-ink-faint transition-colors hover:text-primary"
+          >
+            {visible ? (
+              <EyeOff size={18} aria-hidden="true" />
+            ) : (
+              <Eye size={18} aria-hidden="true" />
+            )}
+          </button>
+        ) : null}
+      </div>
     </div>
   );
 }
