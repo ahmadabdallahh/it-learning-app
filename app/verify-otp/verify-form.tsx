@@ -17,7 +17,7 @@ import {
 const CODE_LENGTH = 6;
 
 const OTP_BOX_CLASS =
-    "size-12 rounded-control border border-line bg-canvas/50 text-center text-xl font-bold focus:border-primary focus:outline-none sm:size-14";
+    "h-12 min-w-0 flex-1 rounded-control border border-line bg-canvas/50 text-center text-xl font-bold focus:border-primary focus:outline-none sm:h-14 sm:w-14 sm:flex-none";
 
 export function VerifyOtpForm() {
     const router = useRouter();
@@ -128,7 +128,7 @@ export function VerifyOtpForm() {
 
             {email ? (
                 <>
-            <form className="space-y-6" onSubmit={handleSubmit} noValidate>
+            <form className="space-y-5 sm:space-y-6" onSubmit={handleSubmit} noValidate>
                 {errorMessage ? <Alert>{errorMessage}</Alert> : null}
 
                 <div className="flex justify-center gap-2 sm:gap-3" dir="ltr">

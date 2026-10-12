@@ -28,7 +28,7 @@ export function AuthShell({
           العودة إلى الرئيسية
         </Link>
         <div
-          className={`w-full rounded-card border border-line bg-surface p-8 shadow-card ${cardClassName}`}
+          className={`w-full rounded-card border border-line bg-surface p-5 shadow-card sm:p-8 ${cardClassName}`}
         >
           {children}
         </div>
@@ -45,7 +45,7 @@ export function AuthBrandHeader({
   subtitle: string;
 }) {
   return (
-    <div className="mb-8 text-center">
+    <div className="mb-6 text-center sm:mb-8">
       <div className="mb-3 inline-flex size-12 items-center justify-center rounded-control bg-primary text-xl font-bold text-primary-foreground">
         IT
       </div>
@@ -65,7 +65,7 @@ export function AuthIconHeader({
   subtitle: string;
 }) {
   return (
-    <div className="mb-8 text-center">
+    <div className="mb-6 text-center sm:mb-8">
       <div className="mb-3 inline-flex size-12 items-center justify-center rounded-control bg-primary-soft text-xl font-bold text-primary">
         {icon}
       </div>
