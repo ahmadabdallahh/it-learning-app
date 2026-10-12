@@ -87,17 +87,17 @@ export const MATERIALS: Material[] = [
     {
         title: "الذكاء الاصطناعي وهياكل البيانات",
         icon: Cpu,
-        image: "https://picsum.photos/seed/it-academy-data/800/500",
+        image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=800&auto=format&fit=crop",
     },
     {
         title: "شبكات الحاسب المتقدمة",
         icon: Network,
-        image: "https://picsum.photos/seed/it-academy-networks/800/500",
+        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop",
     },
     {
         title: "تطوير الويب الحديث",
         icon: Globe,
-        image: "https://picsum.photos/seed/it-academy-web/800/500",
+        image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop",
     },
 ];
 

@@ -26,7 +26,7 @@ export function Features() {
                     <article className="flex flex-col overflow-hidden rounded-card border border-line bg-surface shadow-card lg:row-span-2">
                         <div className="relative aspect-[16/10] w-full bg-surface-muted">
                             <Image
-                                src="https://picsum.photos/seed/it-academy-features/1200/750"
+                                src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1200&auto=format&fit=crop"
                                 alt="طالب يتصفح محاضراته وملخصاته على المنصة"
                                 fill
                                 sizes="(min-width: 1024px) 50vw, 100vw"

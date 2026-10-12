@@ -214,6 +214,21 @@
         "html": "<div class=\"ds-toggle\" role=\"group\" aria-label=\"فترة الاشتراك\"><button class=\"ds-toggle-segment\" type=\"button\" aria-pressed=\"true\">شهري</button><button class=\"ds-toggle-segment\" type=\"button\" aria-pressed=\"false\">سنوي</button></div>",
         "css": ".ds-toggle{display:inline-flex;background:#111827;border-radius:999px;padding:6px;box-shadow:0 1px 2px rgb(17 24 39/.04),0 12px 32px -16px rgb(17 24 39/.1)}.ds-toggle-segment{background:transparent;color:#9ca3af;border:none;border-radius:999px;padding:8px 24px;font:700 .75rem/1.4 'Cairo',sans-serif;cursor:pointer;transition:background-color .2s,color .2s}.ds-toggle-segment[aria-pressed=\"true\"]{background:#5046e5;color:#fff}",
         "notes": "Pricing billing toggle; pressed segment solid indigo. Months/annual drives PRO annual = -25%."
+      },
+      "input": {
+        "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"name@example.com\">",
+        "css": ".ds-input{width:100%;box-sizing:border-box;background:color-mix(in srgb,#f7f7ff 50%,#fff);color:#111827;border:1px solid #e5e7eb;border-radius:12px;padding:12px 16px;font:400 .875rem/1.4 'Cairo','Segoe UI',sans-serif;transition:border-color .2s}.ds-input:focus{border-color:#5046e5;outline:none}",
+        "notes": "Text field and OTP digit boxes: canvas at 50% over the white card, hairline border, indigo border on focus."
+      },
+      "alert": {
+        "html": "<p class=\"ds-alert\" role=\"alert\">حدث خطأ أثناء التسجيل</p>",
+        "css": ".ds-alert{border:1px solid color-mix(in srgb,#dc2626 30%,transparent);background:color-mix(in srgb,#dc2626 5%,transparent);color:#dc2626;border-radius:12px;padding:12px 16px;font:600 .75rem/1.4 'Cairo','Segoe UI',sans-serif}.ds-alert[role='status']{border-color:color-mix(in srgb,#16a34a 30%,transparent);background:color-mix(in srgb,#16a34a 5%,transparent);color:#16a34a}",
+        "notes": "Inline status message; role=status mounts the success treatment automatically."
+      },
+      "theme-toggle": {
+        "html": "<button class=\"ds-theme-toggle\" type=\"button\" aria-pressed=\"true\" aria-label=\"التبديل إلى الوضع النهاري\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><circle cx=\"12\" cy=\"12\" r=\"4\"/><path d=\"M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4\"/></svg></button>",
+        "css": ".ds-theme-toggle{display:flex;align-items:center;justify-content:center;width:40px;height:40px;background:#fff;color:#111827;border:1px solid #e5e7eb;border-radius:12px;cursor:pointer;transition:background-color .2s}.ds-theme-toggle:hover{background:#f4f4f8}",
+        "notes": "Header control: toggles html.dark for the token overrides; light is the default, the choice persists in localStorage."
       }
     }
   }

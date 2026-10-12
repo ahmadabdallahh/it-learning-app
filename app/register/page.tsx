@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { registerUser } from "../lib/auth";
 import {
+    Alert,
     AuthBrandHeader,
     AuthFooterLink,
     AuthShell,
@@ -43,12 +44,7 @@ export default function RegisterPage() {
 
             <form className="space-y-4" onSubmit={handleSubmit} noValidate>
                 {errorMessage ? (
-                    <p
-                        role="alert"
-                        className="rounded-xl border border-error/30 bg-error/5 px-4 py-3 text-xs font-semibold leading-relaxed text-error"
-                    >
-                        {errorMessage}
-                    </p>
+                    <Alert>{errorMessage}</Alert>
                 ) : null}
                 <Field
                     label="الاسم الكامل"

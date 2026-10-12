@@ -37,7 +37,7 @@ export function Hero() {
                 <div className="lg:col-span-5">
                     <div className="relative aspect-[4/3] w-full overflow-hidden rounded-card border border-line bg-surface-muted shadow-lift">
                         <Image
-                            src="https://picsum.photos/seed/it-academy-hero/1200/900"
+                            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1200&auto=format&fit=crop"
                             alt="طلاب قسم IT يذاكرون معاً على منصة IT Academy"
                             fill
                             priority

@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { ShieldCheck } from "lucide-react";
 import { resendVerification, verifyEmail } from "../lib/auth";
 import {
+    Alert,
     AuthIconHeader,
     AuthShell,
     SubmitButton,
@@ -16,7 +17,7 @@ import {
 const CODE_LENGTH = 6;
 
 const OTP_BOX_CLASS =
-    "h-12 w-12 rounded-xl border border-[#E5E7EB] bg-[#F7F7FF]/50 text-center text-xl font-bold focus:border-[#5046E5] focus:outline-none sm:h-14 sm:w-14";
+    "size-12 rounded-control border border-line bg-canvas/50 text-center text-xl font-bold focus:border-primary focus:outline-none sm:size-14";
 
 export function VerifyOtpForm() {
     const router = useRouter();
@@ -83,26 +84,16 @@ export function VerifyOtpForm() {
             />
 
             {!email ? (
-                <p
-                    role="alert"
-                    className="mb-6 rounded-xl border border-error/30 bg-error/5 px-4 py-3 text-xs font-semibold leading-relaxed text-error"
-                >
+                <Alert className="mb-6">
                     تعذّر تحديد البريد الإلكتروني.{" "}
                     <Link href="/register" className="font-bold hover:underline">
                         أعد التسجيل
                     </Link>
-                </p>
+                </Alert>
             ) : null}
 
             <form className="space-y-6" onSubmit={handleSubmit} noValidate>
-                {errorMessage ? (
-                    <p
-                        role="alert"
-                        className="rounded-xl border border-error/30 bg-error/5 px-4 py-3 text-xs font-semibold leading-relaxed text-error"
-                    >
-                        {errorMessage}
-                    </p>
-                ) : null}
+                {errorMessage ? <Alert>{errorMessage}</Alert> : null}
 
                 <div className="flex justify-center gap-2 sm:gap-3" dir="ltr">
                     {digits.map((digit, index) => (
@@ -146,32 +137,24 @@ export function VerifyOtpForm() {
                 </SubmitButton>
             </form>
 
-            <p className="mt-6 text-xs text-[#6B7280]">
+            <p className="mt-6 text-xs text-ink-soft">
                 لم تستلم الكود؟{" "}
                 <button
                     type="button"
                     disabled={!email || resend.isPending}
                     onClick={() => resend.mutate({ email })}
-                    className="font-bold text-[#5046E5] hover:underline disabled:cursor-not-allowed disabled:opacity-70"
+                    className="font-bold text-primary hover:underline disabled:cursor-not-allowed disabled:opacity-70"
                 >
                     {resend.isPending ? "جاري الإرسال..." : "إعادة إرسال"}
                 </button>
             </p>
             {resend.isSuccess ? (
-                <p
-                    role="status"
-                    className="mt-2 text-xs font-semibold text-success"
-                >
+                <Alert variant="success" className="mt-2">
                     تم إرسال كود جديد إلى بريدك الإلكتروني.
-                </p>
+                </Alert>
             ) : null}
             {resend.isError ? (
-                <p
-                    role="alert"
-                    className="mt-2 text-xs font-semibold text-error"
-                >
-                    {resend.error.message}
-                </p>
+                <Alert className="mt-2">{resend.error.message}</Alert>
             ) : null}
         </AuthShell>
     );

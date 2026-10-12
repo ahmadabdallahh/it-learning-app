@@ -3,7 +3,10 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 /* Shared shell + controls for the auth pages (login / register / verify-otp /
-   forget-password). Class names mirror the approved HTML prototypes exactly. */
+   forget-password). Every value consumes the design tokens from
+   app/globals.css (bg-canvas, text-ink, bg-primary, rounded-card,
+   rounded-control, shadow-card, ...) so the auth surfaces stay on-system
+   with the landing page. */
 
 export function AuthShell({
   children,
@@ -13,17 +16,17 @@ export function AuthShell({
   cardClassName?: string;
 }) {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#F7F7FF] p-4 text-[#111827]">
+    <div className="flex min-h-screen items-center justify-center bg-canvas p-4 text-ink">
       <div className="w-full max-w-md">
         <Link
           href="/"
-          className="mb-4 inline-flex items-center gap-1.5 text-xs font-semibold text-[#6B7280] transition-colors hover:text-[#5046E5]"
+          className="mb-4 inline-flex items-center gap-1.5 text-xs font-semibold text-ink-soft transition-colors hover:text-primary"
         >
           <ArrowRight size={14} aria-hidden="true" />
           العودة إلى الرئيسية
         </Link>
         <div
-          className={`w-full rounded-2xl border border-[#E5E7EB] bg-white p-8 shadow-[0_4px_20px_rgba(80,70,229,0.04)] ${cardClassName}`}
+          className={`w-full rounded-card border border-line bg-surface p-8 shadow-card ${cardClassName}`}
         >
           {children}
         </div>
@@ -41,11 +44,11 @@ export function AuthBrandHeader({
 }) {
   return (
     <div className="mb-8 text-center">
-      <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#5046E5] text-xl font-bold text-white shadow-md">
+      <div className="mb-3 inline-flex size-12 items-center justify-center rounded-control bg-primary text-xl font-bold text-primary-foreground">
         IT
       </div>
       <h1 className="text-2xl font-bold">{title}</h1>
-      <p className="mt-1 text-xs text-[#6B7280]">{subtitle}</p>
+      <p className="mt-1 text-xs text-ink-soft">{subtitle}</p>
     </div>
   );
 }
@@ -61,12 +64,41 @@ export function AuthIconHeader({
 }) {
   return (
     <div className="mb-8 text-center">
-      <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#EEF0FF] text-xl font-bold text-[#5046E5]">
+      <div className="mb-3 inline-flex size-12 items-center justify-center rounded-control bg-primary-soft text-xl font-bold text-primary">
         {icon}
       </div>
       <h1 className="mb-1 text-2xl font-bold">{title}</h1>
-      <p className="text-xs text-[#6B7280]">{subtitle}</p>
+      <p className="text-xs text-ink-soft">{subtitle}</p>
     </div>
+  );
+}
+
+/**
+ * Inline status message. Renders with the semantic success/error treatment
+ * and picks the right accessibility role automatically.
+ */
+export function Alert({
+  variant = "error",
+  className = "",
+  children,
+}: {
+  /** "error" (role="alert") or "success" (role="status"). */
+  variant?: "error" | "success";
+  className?: string;
+  children: ReactNode;
+}) {
+  const isError = variant === "error";
+  return (
+    <p
+      role={isError ? "alert" : "status"}
+      className={`rounded-control border px-4 py-3 text-xs font-semibold leading-relaxed ${
+        isError
+          ? "border-error/30 bg-error/5 text-error"
+          : "border-success/30 bg-success/5 text-success"
+      } ${className}`}
+    >
+      {children}
+    </p>
   );
 }
 
@@ -84,7 +116,7 @@ export function Field({ label, aside, ...inputProps }: FieldProps) {
         <div className="mb-1.5 flex items-center justify-between">
           <label
             htmlFor={fieldId}
-            className="block text-xs font-semibold text-[#111827]"
+            className="block text-xs font-semibold text-ink"
           >
             {label}
           </label>
@@ -93,7 +125,7 @@ export function Field({ label, aside, ...inputProps }: FieldProps) {
       ) : (
         <label
           htmlFor={fieldId}
-          className="mb-1.5 block text-xs font-semibold text-[#111827]"
+          className="mb-1.5 block text-xs font-semibold text-ink"
         >
           {label}
         </label>
@@ -101,7 +133,7 @@ export function Field({ label, aside, ...inputProps }: FieldProps) {
       <input
         id={fieldId}
         {...inputProps}
-        className="w-full rounded-xl border border-[#E5E7EB] bg-[#F7F7FF]/50 px-4 py-3 text-sm focus:border-[#5046E5] focus:outline-none"
+        className="w-full rounded-control border border-line bg-canvas/50 px-4 py-3 text-sm focus:border-primary focus:outline-none"
       />
     </div>
   );
@@ -118,7 +150,7 @@ export function SubmitButton({
     <button
       type="submit"
       disabled={disabled}
-      className="mt-2 w-full rounded-xl bg-[#5046E5] py-3 text-sm font-semibold text-white shadow-md shadow-[#5046E5]/20 transition-all hover:bg-[#4338CA] disabled:cursor-not-allowed disabled:opacity-70"
+      className="mt-2 w-full rounded-control bg-primary py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-strong active:translate-y-px disabled:cursor-not-allowed disabled:opacity-70"
     >
       {children}
     </button>
@@ -135,12 +167,9 @@ export function AuthFooterLink({
   href: string;
 }) {
   return (
-    <p className="mt-6 text-center text-xs text-[#6B7280]">
+    <p className="mt-6 text-center text-xs text-ink-soft">
       {text}{" "}
-      <a
-        href={href}
-        className="font-bold text-[#5046E5] hover:underline"
-      >
+      <a href={href} className="font-bold text-primary hover:underline">
         {linkText}
       </a>
     </p>

@@ -12,6 +12,9 @@
    ===================================================================== */
 
 :root {
+  /* Default theme is LIGHT (see html.dark overrides below). */
+  color-scheme: light;
+
   /* Surfaces */
   --canvas: #f7f7ff;
   --surface: #ffffff;
@@ -51,39 +54,41 @@
 }
 
 /* ---------------------------------------------------------------------
-   Dark mode: token overrides only.
-   The light values above are untouched, so the approved light identity is
-   pixel-identical. Visitors whose OS prefers dark get a tuned dark theme.
-   Delete this block to force light-only.
+   Dark mode: class-based token overrides only. The DEFAULT theme is
+   light. The <html> element carries `.dark` when the visitor picks dark
+   via the header toggle (ThemeToggle.tsx); the choice persists in
+   localStorage under "it-academy-theme" and is applied before hydration
+   by the inline script in app/layout.tsx. Light stays the identity,
+   dark is the tuned derivative. The light values above are untouched.
    --------------------------------------------------------------------- */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --canvas: #0b0b13;
-    --surface: #14141e;
-    --surface-muted: #1a1a26;
-    --primary-light: #1d1d33;
-    --accent-surface: #23233c;
+html.dark {
+  color-scheme: dark;
 
-    --ink: #f3f3f8;
-    --ink-soft: #a6a6ba;
-    --ink-faint: #74748c;
+  --canvas: #0b0b13;
+  --surface: #14141e;
+  --surface-muted: #1a1a26;
+  --primary-light: #1d1d33;
+  --accent-surface: #23233c;
 
-    --line: #262635;
-    --line-strong: #34344b;
+  --ink: #f3f3f8;
+  --ink-soft: #a6a6ba;
+  --ink-faint: #74748c;
 
-    --primary: #6a60ee;
-    --primary-strong: #867ef4;
-    --primary-soft: #212145;
-    --primary-foreground: #ffffff;
+  --line: #262635;
+  --line-strong: #34344b;
 
-    --success: #34d399;
-    --error: #f87171;
+  --primary: #6a60ee;
+  --primary-strong: #867ef4;
+  --primary-soft: #212145;
+  --primary-foreground: #ffffff;
 
-    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.5),
-      0 12px 32px -16px rgb(0 0 0 / 0.65);
-    --shadow-lift: 0 1px 2px rgb(0 0 0 / 0.55),
-      0 20px 44px -20px rgb(106 96 238 / 0.55);
-  }
+  --success: #34d399;
+  --error: #f87171;
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.5),
+    0 12px 32px -16px rgb(0 0 0 / 0.65);
+  --shadow-lift: 0 1px 2px rgb(0 0 0 / 0.55),
+    0 20px 44px -20px rgb(106 96 238 / 0.55);
 }
 
 @theme inline {

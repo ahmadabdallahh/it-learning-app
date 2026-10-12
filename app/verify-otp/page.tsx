@@ -12,7 +12,7 @@ export default function VerifyOtpPage() {
         <Suspense
             fallback={
                 <AuthShell cardClassName="text-center">
-                    <p className="text-xs text-[#6B7280]">جاري التحميل...</p>
+                    <p className="text-xs text-ink-soft">جاري التحميل...</p>
                 </AuthShell>
             }
         >

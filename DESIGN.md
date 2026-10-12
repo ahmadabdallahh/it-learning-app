@@ -87,6 +87,12 @@ components:
     textColor: "#FFFFFF"
     rounded: "999px"
     padding: "6px"
+  input:
+    backgroundColor: "#F7F7FF"
+    textColor: "#111827"
+    rounded: "12px"
+    padding: "12px 16px"
+    typography: "400 0.875rem/1.4 Cairo"
 ---
 
 # Design System: IT Academy
@@ -152,7 +158,7 @@ components:
 - **Surfaces** — canvas `#F7F7FF`, white `#FFFFFF`, muted `#F4F4F8` (image placeholders), lilac tint `#E8E9FF` (recessed accents).
 - **Ink** — `#111827` for headings and dark CTAs, `#6B7280` for body/secondary text, `#9CA3AF` for faint meta. Hairlines `#E5E7EB` and `#D1D5DB` structure without shouting.
 - **Semantic** — `success #16A34A` for positive status chips ("متاح"), `error #DC2626` for problems, `#FBBF24` gold strictly for star ratings.
-- The palette is delta-tuned in `@media (prefers-color-scheme: dark)`: tokens swap (canvas `#0B0B13`, surfaces `#14141E`, primary brightens to `#6A60EE`) while light values stay pixel-identical. Delete the block to ship light-only.
+- The palette is delta-tuned in an `html.dark` override block: tokens swap (canvas `#0B0B13`, surfaces `#14141E`, primary brightens to `#6A60EE`) while light stays the default identity. The header theme toggle adds the `.dark` class and persists the choice in localStorage (`it-academy-theme`); a pre-hydration script in `layout.tsx` restores a stored dark choice without a flash of light.
 - All surfaces sit on the __tokens__, not raw hex — retune the palette from `:root` and the `@theme inline` block in one place.
 
 ## Components
@@ -165,7 +171,10 @@ components:
 - **Stats band.** Bare, no card: 2×2 → 4-up with hairline dividers, numbers in heavy Cairo with soft-ink labels.
 - **Steps.** Three icon circles joined by a hairline, 600-weight Arabic action labels ("جهّز حسابك" → "شوف المحتوى" → "ذاكر وخلص").
 - **Billing toggle.** One pill switch (`bg-ink`, `p-1.5`) with two full segments; the pressed segment turns solid indigo with white text, `aria-pressed` per segment — billed as "شهري / سنوي".
+- **Inputs.** Text fields and OTP digit boxes sit on `bg-canvas/50` over the white card with a hairline border; the indigo border marks focus. Radius is `rounded-control` (12px), padding `12px 16px`.
+- **Alerts.** One inline status block shared by the auth helpers: error (red hairline/tint/text) or success (green), with `role="alert"` / `role="status"` assigned by variant.
 - **Navigation.** A floating glass shell — `rounded-card`, `bg-surface/80`, `backdrop-blur-md`, `shadow-card`, sticky at top — with soft-ink links that turn indigo on hover and a compact dark "دخول" pill.
+- **Theme toggle.** A `size-10` icon button (`rounded-control`, hairline border) in the glass nav swaps the page light/dark via the `html.dark` class; light is the default and the choice persists in localStorage.
 - **Signature moments.** The indigo featured plan floating in a row of white cards, and the glass nav pill. Two indigo surfaces per page, max — the hero CTA and the PRO card.
 
 ## Do's and Don'ts
@@ -180,4 +189,4 @@ components:
 - **Don't** hardcode hex or components outside the tokens; edit `globals.css` `:root` and the `@theme inline` block to retune the palette.
 - **Don't** use `h-screen` full-viewport sections, auto-sliding carousels, or type smaller than 10px.
 - **Don't** put Latin/English trademarks on Arabic keystrokes, and never set the page to `dir="ltr"`.
-- **Don't** drift: auth pages (`app/_components/auth.tsx`, login/register/forgot/OTP) still hardcode hex and 16px cards — when touched, migrate them onto these tokens so the app and landing share one system.
+- **Don't** drift: keep every surface — landing and auth (Shell, Fields, OTP boxes, Alerts) — on these tokens; no raw hex outside `globals.css`. The auth monogram stays solid indigo like any icon tile, and inputs render `bg-canvas/50` over the white card.

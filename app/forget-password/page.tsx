@@ -29,9 +29,9 @@ export default function ForgetPasswordPage() {
         <SubmitButton>إرسال رابط الاستعادة</SubmitButton>
       </form>
 
-      <p className="mt-6 text-center text-xs text-[#6B7280]">
+      <p className="mt-6 text-center text-xs text-ink-soft">
         تذكرت كلمة المرور؟{" "}
-        <a href="/login" className="font-bold text-[#5046E5] hover:underline">
+        <a href="/login" className="font-bold text-primary hover:underline">
           العودة لتسجيل الدخول
         </a>
       </p>

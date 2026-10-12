@@ -27,6 +27,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
     return (
         <html lang="ar" dir="rtl" className="h-full antialiased">
+            <head>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `try{var t=localStorage.getItem("it-academy-theme");if(t==="dark"){document.documentElement.classList.add("dark")}}catch(e){}`,
+                    }}
+                />
+            </head>
             <body className="flex min-h-full flex-col font-sans">
         <Providers>{children}</Providers>
       </body>

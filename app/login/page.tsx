@@ -32,7 +32,7 @@ export default function LoginPage() {
           aside={
             <a
               href="/forget-password"
-              className="text-xs text-[#5046E5] hover:underline"
+              className="text-xs text-primary hover:underline"
             >
               نسيت كلمة المرور؟
             </a>
