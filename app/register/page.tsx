@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
-import { registerUser } from "../lib/auth";
+import { isApiError, registerUser } from "../lib/auth";
 import {
     Alert,
     AuthBrandHeader,
@@ -34,6 +35,12 @@ export default function RegisterPage() {
     }
 
     const errorMessage = register.isError ? register.error.message : null;
+    // Email already registered: bridge to verification instead of
+    // stranding the user (re-registering can never succeed).
+    const emailTaken =
+        isApiError(register.error) &&
+        (register.error.code === "DUPLICATE_EMAIL" ||
+            register.error.status === 409);
 
     return (
         <AuthShell>
@@ -43,7 +50,17 @@ export default function RegisterPage() {
             />
 
             <form className="space-y-4" onSubmit={handleSubmit} noValidate>
-                {errorMessage ? (
+                {emailTaken ? (
+                    <Alert>
+                        هذا البريد مسجل بالفعل.{" "}
+                        <Link
+                            href={`/verify-otp?email=${encodeURIComponent(email.trim())}`}
+                            className="font-bold hover:underline"
+                        >
+                            أدخل كود التحقق
+                        </Link>
+                    </Alert>
+                ) : errorMessage ? (
                     <Alert>{errorMessage}</Alert>
                 ) : null}
                 <Field

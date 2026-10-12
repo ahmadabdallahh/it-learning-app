@@ -101,6 +101,27 @@ type ApiErrorPayload = {
     error?: { code?: string; message?: string };
 };
 
+/** Error carrying the backend's stable code + HTTP status so UI can
+   branch on it (e.g. EMAIL_NOT_VERIFIED links back to verification).
+   Plain object shape, no classes: attach the fields to an Error. */
+export type ApiError = Error & { code?: string; status?: number };
+
+export function toApiError(
+    message: string,
+    options?: { code?: string; status?: number },
+): ApiError {
+    const error = new Error(message) as ApiError;
+    error.code = options?.code;
+    error.status = options?.status;
+    return error;
+}
+
+export function isApiError(value: unknown): value is ApiError {
+    return (
+        value instanceof Error && ("code" in value || "status" in value)
+    );
+}
+
 /** Arabic copy for stable backend error codes (observed live).
    Unknown codes fall through to the backend message, then the fallback. */
 const ERROR_CODE_MESSAGES: Record<string, string> = {
@@ -109,6 +130,7 @@ const ERROR_CODE_MESSAGES: Record<string, string> = {
         "لم يتم تفعيل بريدك بعد، أدخل كود التحقق المرسل إلى بريدك.",
     INVALID_CREDENTIALS: "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
     USER_NOT_FOUND: "لا يوجد حساب بهذا البريد، أنشئ حساباً جديداً.",
+    DUPLICATE_EMAIL: "هذا البريد مسجل بالفعل.",
     VALIDATION_ERROR: "بيانات غير صالحة، راجع الحقول وحاول مرة أخرى.",
 };
 
@@ -145,8 +167,9 @@ async function postJson<T>(path: string, body: unknown): Promise<T> {
         const data = (await response
             .json()
             .catch(() => null)) as ApiErrorPayload | null;
-        throw new Error(
+        throw toApiError(
             apiErrorMessage(data, "حدث خطأ غير متوقع، حاول مرة أخرى."),
+            { code: data?.error?.code, status: response.status },
         );
     }
 
@@ -164,14 +187,17 @@ async function getJson<T>(path: string): Promise<T> {
     }
 
     if (response.status === 401) {
-        throw new Error("انتهت الجلسة، سجل الدخول مرة أخرى.");
+        throw toApiError("انتهت الجلسة، سجل الدخول مرة أخرى.", {
+            status: 401,
+        });
     }
     if (!response.ok) {
         const data = (await response
             .json()
             .catch(() => null)) as ApiErrorPayload | null;
-        throw new Error(
+        throw toApiError(
             apiErrorMessage(data, "حدث خطأ غير متوقع، حاول مرة أخرى."),
+            { code: data?.error?.code, status: response.status },
         );
     }
 

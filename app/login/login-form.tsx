@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import {
@@ -14,6 +15,7 @@ import {
 import {
     dashboardPathForRole,
     getCurrentUser,
+    isApiError,
     loginUser,
     type Role,
 } from "../lib/auth";
@@ -50,6 +52,11 @@ export function LoginForm() {
     }
 
     const errorMessage = login.isError ? login.error.message : null;
+    // Unverified accounts cannot log in: bridge them back to the
+    // verification page with their email instead of stranding them.
+    const needsVerification =
+        isApiError(login.error) &&
+        login.error.code === "EMAIL_NOT_VERIFIED";
 
     return (
         <AuthShell>
@@ -65,7 +72,19 @@ export function LoginForm() {
             ) : null}
 
             <form className="space-y-4" onSubmit={handleSubmit} noValidate>
-                {errorMessage ? <Alert>{errorMessage}</Alert> : null}
+                {needsVerification ? (
+                    <Alert>
+                        بريدك غير مفعّل بعد.{" "}
+                        <Link
+                            href={`/verify-otp?email=${encodeURIComponent(email.trim())}`}
+                            className="font-bold hover:underline"
+                        >
+                            أدخل كود التحقق
+                        </Link>
+                    </Alert>
+                ) : errorMessage ? (
+                    <Alert>{errorMessage}</Alert>
+                ) : null}
                 <Field
                     label="البريد الإلكتروني أو كود الدفعة"
                     name="email"
