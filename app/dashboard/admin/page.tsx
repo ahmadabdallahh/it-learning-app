@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import { GraduationCap, Layers, Users } from "lucide-react";
 import {
     AccountCard,
     DashboardHeader,
 } from "../../_components/dashboard";
+import { DashboardGateFallback } from "../../_components/dashboard-gate";
 import { dashboardPathForRole } from "../../lib/auth";
 import { getSessionUser } from "../../lib/session";
 
@@ -34,7 +36,15 @@ const QUICK_LINKS = [
     },
 ];
 
-export default async function AdminDashboardPage() {
+export default function AdminDashboardPage() {
+    return (
+        <Suspense fallback={<DashboardGateFallback />}>
+            <AdminContent />
+        </Suspense>
+    );
+}
+
+async function AdminContent() {
     const user = await getSessionUser();
     if (!user) redirect("/login");
     if (user.role !== "admin") redirect(dashboardPathForRole(user.role));

@@ -174,6 +174,7 @@ components:
 - **Inputs.** Text fields and OTP digit boxes sit on `bg-canvas/50` over the white card with a hairline border; the indigo border marks focus. Radius is `rounded-control` (12px), padding `12px 16px`.
 - **Alerts.** One inline status block shared by the auth helpers: error (red hairline/tint/text) or success (green), with `role="alert"` / `role="status"` assigned by variant.
 - **Navigation.** A floating glass shell — `rounded-card`, `bg-surface/80`, `backdrop-blur-md`, `shadow-card`, sticky at top — with soft-ink links that turn indigo on hover and a compact dark "دخول" pill.
+- **Dashboard shell.** Authenticated pages reuse the same tokens: sidebar (`bg-surface`, hairline `border-e`, active link on `indigo-soft`), role badge pill, account summary card, and a static skeleton fallback with identical geometry streamed while the session gate resolves.
 - **Theme toggle.** A `size-10` icon button (`rounded-control`, hairline border) in the glass nav swaps the page light/dark via the `html.dark` class; light is the default and the choice persists in localStorage.
 - **Signature moments.** The indigo featured plan floating in a row of white cards, and the glass nav pill. Two indigo surfaces per page, max — the hero CTA and the PRO card.
 

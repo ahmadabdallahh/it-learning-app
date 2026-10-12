@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import { BookOpen, ListChecks, Trophy } from "lucide-react";
 import {
     AccountCard,
     DashboardHeader,
 } from "../../_components/dashboard";
+import { DashboardGateFallback } from "../../_components/dashboard-gate";
 import { dashboardPathForRole } from "../../lib/auth";
 import { getSessionUser } from "../../lib/session";
 
@@ -34,7 +36,15 @@ const QUICK_LINKS = [
     },
 ];
 
-export default async function StudentDashboardPage() {
+export default function StudentDashboardPage() {
+    return (
+        <Suspense fallback={<DashboardGateFallback />}>
+            <StudentContent />
+        </Suspense>
+    );
+}
+
+async function StudentContent() {
     const user = await getSessionUser();
     if (!user) redirect("/login");
     if (user.role !== "student") redirect(dashboardPathForRole(user.role));

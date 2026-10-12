@@ -31,6 +31,7 @@ Whole-batch curriculum in one place: every subject of the cohort's IT program or
 Confirmed functionality (shipped landing copy + the API documented in `routes.txt`):
 
 - **Auth:** register (username/email/password), OTP email verification and resend, login/logout via HTTP-only session cookie, `GET /me`.
+- **Role dashboards:** after login the session role routes each user to their own home (`/dashboard/student`, `/dashboard/instructor`, `/dashboard/admin`); `/dashboard` resolves the role server-side. Verified registration lands on login with a success notice.
 - **Content:** categories, courses, sections, lessons with `video_url` and free previews; enrollment flow (free courses activate immediately, paid courses return 402 until paid).
 - **Progress:** watched-seconds tracking per lesson, lesson completion, auto-completing course progress.
 - **Roles:** student / instructor / admin; admin content management and user administration.
