@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-12T19:01:01Z",
+  "extensions": {
+    "colorMeta": {
+      "study-hall-indigo": {
+        "role": "primary",
+        "displayName": "Study-Hall Indigo",
+        "canonical": true,
+        "tonalRamp": {
+          "50": "oklch(0.97 0.02 262)",
+          "100": "oklch(0.93 0.04 262)",
+          "200": "oklch(0.87 0.07 262)",
+          "300": "oklch(0.78 0.12 262)",
+          "400": "oklch(0.66 0.17 262)",
+          "500": "oklch(0.56 0.20 262)",
+          "600": "oklch(0.48 0.22 262)",
+          "700": "oklch(0.42 0.23 262)",
+          "800": "oklch(0.36 0.21 262)",
+          "900": "oklch(0.30 0.18 262)"
+        }
+      },
+      "study-hall-indigo-deep": {
+        "role": "primary",
+        "displayName": "Indigo Hover (Primary Strong)",
+        "canonical": false
+      },
+      "study-hall-indigo-soft": {
+        "role": "primary",
+        "displayName": "Indigo Tint (Icon/Chip Fill)",
+        "canonical": false
+      },
+      "lavender-canvas": {
+        "role": "neutral",
+        "displayName": "Lavender Canvas",
+        "canonical": true,
+        "tonalRamp": {
+          "50": "oklch(0.985 0.005 262)",
+          "100": "oklch(0.96 0.01 262)",
+          "200": "oklch(0.92 0.015 262)",
+          "300": "oklch(0.88 0.02 262)",
+          "400": "oklch(0.83 0.025 262)",
+          "500": "oklch(0.78 0.03 262)",
+          "600": "oklch(0.7 0.035 262)",
+          "700": "oklch(0.6 0.04 262)",
+          "800": "oklch(0.48 0.045 262)",
+          "900": "oklch(0.36 0.05 262)"
+        }
+      },
+      "surface-white": {
+        "role": "neutral",
+        "displayName": "Paper Surface",
+        "canonical": false
+      },
+      "surface-muted": {
+        "role": "neutral",
+        "displayName": "Muted Surface (Image Placeholder)",
+        "canonical": false
+      },
+      "lilac-tint": {
+        "role": "neutral",
+        "displayName": "Lilac Tint (Recessed Accent)",
+        "canonical": false
+      },
+      "ink-navy": {
+        "role": "neutral",
+        "displayName": "Deep-Navy Ink",
+        "canonical": true,
+        "tonalRamp": {
+          "50": "oklch(0.97 0.004 250)",
+          "100": "oklch(0.93 0.006 250)",
+          "200": "oklch(0.87 0.009 250)",
+          "300": "oklch(0.78 0.012 250)",
+          "400": "oklch(0.66 0.015 250)",
+          "500": "oklch(0.55 0.018 250)",
+          "600": "oklch(0.45 0.021 250)",
+          "700": "oklch(0.36 0.024 250)",
+          "800": "oklch(0.28 0.026 250)",
+          "900": "oklch(0.21 0.028 250)"
+        }
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Soft Ink (Body Text)",
+        "canonical": false
+      },
+      "ink-faint": {
+        "role": "neutral",
+        "displayName": "Faint Ink (Meta/Footnotes)",
+        "canonical": false
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline Border",
+        "canonical": false
+      },
+      "hairline-strong": {
+        "role": "neutral",
+        "displayName": "Strong Hairline (Secondary Border)",
+        "canonical": false
+      },
+      "success-green": {
+        "role": "semantic",
+        "displayName": "Success Green",
+        "canonical": false,
+        "tonalRamp": {
+          "50": "oklch(0.97 0.03 150)",
+          "100": "oklch(0.94 0.05 150)",
+          "200": "oklch(0.88 0.08 150)",
+          "300": "oklch(0.8 0.11 150)",
+          "400": "oklch(0.71 0.13 150)",
+          "500": "oklch(0.62 0.14 150)",
+          "600": "oklch(0.53 0.15 150)",
+          "700": "oklch(0.43 0.15 150)",
+          "800": "oklch(0.38 0.13 150)",
+          "900": "oklch(0.32 0.11 150)"
+        }
+      },
+      "error-red": {
+        "role": "semantic",
+        "displayName": "Error Red",
+        "canonical": false,
+        "tonalRamp": {
+          "50": "oklch(0.97 0.02 25)",
+          "100": "oklch(0.94 0.04 25)",
+          "200": "oklch(0.9 0.07 25)",
+          "300": "oklch(0.84 0.11 25)",
+          "400": "oklch(0.76 0.15 25)",
+          "500": "oklch(0.67 0.19 25)",
+          "600": "oklch(0.58 0.21 25)",
+          "700": "oklch(0.48 0.2 25)",
+          "800": "oklch(0.42 0.18 25)",
+          "900": "oklch(0.36 0.15 25)"
+        }
+      },
+      "rating-gold": {
+        "role": "semantic",
+        "displayName": "Rating Gold",
+        "canonical": false
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Hero Display (Cairo Extrabold)",
+        "purpose": "Single first-viewport headline, 2.25rem -> 3rem, weight 800."
+      },
+      "headline": {
+        "displayName": "Section Headline (Cairo Bold)",
+        "purpose": "Section and band headers with soft-ink lead sentence."
+      },
+      "title": {
+        "displayName": "Card Title (Cairo Bold)",
+        "purpose": "Card, step, and feature titles at 1.125rem."
+      },
+      "body": {
+        "displayName": "Body Text (Cairo Regular)",
+        "purpose": "Descriptions and supporting copy in ink-soft."
+      },
+      "label": {
+        "displayName": "Eyebrow / Chip Label (Cairo Semibold)",
+        "purpose": "Eyebrow pills, chips, and small badges at 0.75rem."
+      }
+    },
+    "shadowMeta": {
+      "card": {
+        "displayName": "Card Rest Shadow",
+        "value": "0 1px 2px rgb(17 24 39 / 0.04), 0 12px 32px -16px rgb(17 24 39 / 0.10)",
+        "notes": "Rest state for standalone cards and the glass nav shell. Dark mode deepens with black-tinted offsets."
+      },
+      "lift": {
+        "displayName": "Indigo Lift Shadow",
+        "value": "0 1px 2px rgb(17 24 39 / 0.05), 0 20px 44px -20px rgb(80 70 229 / 0.28)",
+        "notes": "Earned: hover on interactive cards, hero image, featured PRO plan. Dark mode uses indigo rgb(106 96 238 / 0.55)."
+      }
+    },
+    "breakpoints": {
+      "sm": "640px",
+      "md": "768px",
+      "lg": "1024px",
+      "xl": "1280px"
+    },
+    "components": {
+      "button-primary": {
+        "html": "<button class=\"ds-btn-primary\" type=\"button\">ابدأ مجاناً</button>",
+        "css": ".ds-btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:#5046e5;color:#fff;border:none;border-radius:12px;padding:14px 28px;font:600 .875rem/1.4 'Cairo','Segoe UI',sans-serif;cursor:pointer;box-shadow:0 1px 2px rgb(17 24 39/.05),0 20px 44px -20px rgb(80 70 229/.28);transition:background-color .2s,transform .15s}.ds-btn-primary:hover{background:#4338ca}.ds-btn-primary:focus-visible{outline:2px solid #5046e5;outline-offset:2px}.ds-btn-primary:active{transform:translateY(1px)}",
+        "notes": "Single primary action per section. Hero instance carries shadow-lift."
+      },
+      "button-dark": {
+        "html": "<button class=\"ds-btn-dark\" type=\"button\">تصفح المواد</button>",
+        "css": ".ds-btn-dark{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:#111827;color:#f7f7ff;border:none;border-radius:12px;padding:12px 16px;font:700 .875rem/1.4 'Cairo','Segoe UI',sans-serif;cursor:pointer;transition:background-color .2s,transform .15s}.ds-btn-dark:hover{background:#5046e5}.ds-btn-dark:active{transform:translateY(1px)}",
+        "notes": "Card action CTA: dark ink turning indigo on hover."
+      },
+      "button-secondary": {
+        "html": "<button class=\"ds-btn-secondary\" type=\"button\">دخول</button>",
+        "css": ".ds-btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:#fff;color:#111827;border:1px solid #d1d5db;border-radius:12px;padding:14px 28px;font:600 .875rem/1.4 'Cairo','Segoe UI',sans-serif;cursor:pointer;transition:background-color .2s,transform .15s}.ds-btn-secondary:hover{background:#f4f4f8}.ds-btn-secondary:active{transform:translateY(1px)}",
+        "notes": "Ghost/outline variant; fills surface-muted on hover."
+      },
+      "card": {
+        "html": "<article class=\"ds-card ds-card-hover\"><h3 class=\"ds-card-title\">شبكات الحاسب المتقدمة</h3><p class=\"ds-card-body\">ملخص كامل لكل المحاضرات..</p></article>",
+        "css": ".ds-card{background:#fff;border:1px solid #e5e7eb;border-radius:16px;padding:24px;box-shadow:0 1px 2px rgb(17 24 39/.04),0 12px 32px -16px rgb(17 24 39/.1);transition:box-shadow .2s,transform .2s}.ds-card-hover:hover{box-shadow:0 1px 2px rgb(17 24 39/.05),0 20px 44px -20px rgb(80 70 229/.28);transform:translateY(-2px)}.ds-card-title{margin:0;font:700 1.125rem/1.3 'Cairo',sans-serif;color:#111827}.ds-card-body{margin:.25rem 0 0;font:400 .875rem/1.65 'Cairo',sans-serif;color:#6b7280}",
+        "notes": "Flat at rest on a hairline; lift earned on hover. Editorial cards pad p-7/p-8 with a 16/10 image band."
+      },
+      "card-featured": {
+        "html": "<article class=\"ds-featured\"><span class=\"ds-badge\">الأكثر طلباً</span><h3 class=\"ds-featured-title\">PRO</h3><button class=\"ds-btn-featured\" type=\"button\">ابدأ مجاناً</button></article>",
+        "css": ".ds-featured{position:relative;background:#5046e5;color:#fff;border-radius:16px;padding:32px;box-shadow:0 1px 2px rgb(17 24 39/.05),0 20px 44px -20px rgb(80 70 229/.28)}.ds-badge{position:absolute;top:16px;inset-inline-end:16px;background:#fff;color:#5046e5;border-radius:999px;padding:4px 12px;font:700 .6875rem/1.4 'Cairo',sans-serif}.ds-featured-title{margin:0;font:800 1.5rem/1.2 'Cairo',sans-serif}.ds-btn-featured{margin-top:24px;width:100%;background:#fff;color:#5046e5;border:none;border-radius:12px;padding:14px 28px;font:700 .875rem/1.4 'Cairo',sans-serif;cursor:pointer}.ds-btn-featured:hover{background:#f4f4f8}",
+        "notes": "The indigo featured plan; floats (-translate-y-4) above white neighbors on lg."
+      },
+      "chip": {
+        "html": "<span class=\"ds-chip\">الدفعة كاملة في مكان واحد</span>",
+        "css": ".ds-chip{display:inline-block;background:#eef0ff;color:#5046e5;border-radius:999px;padding:4px 12px;font:600 .75rem/1.4 'Cairo',sans-serif}",
+        "notes": "Eyebrows, status chips, and the featured-plan badge."
+      },
+      "toggle": {
+        "html": "<div class=\"ds-toggle\" role=\"group\" aria-label=\"فترة الاشتراك\"><button class=\"ds-toggle-segment\" type=\"button\" aria-pressed=\"true\">شهري</button><button class=\"ds-toggle-segment\" type=\"button\" aria-pressed=\"false\">سنوي</button></div>",
+        "css": ".ds-toggle{display:inline-flex;background:#111827;border-radius:999px;padding:6px;box-shadow:0 1px 2px rgb(17 24 39/.04),0 12px 32px -16px rgb(17 24 39/.1)}.ds-toggle-segment{background:transparent;color:#9ca3af;border:none;border-radius:999px;padding:8px 24px;font:700 .75rem/1.4 'Cairo',sans-serif;cursor:pointer;transition:background-color .2s,color .2s}.ds-toggle-segment[aria-pressed=\"true\"]{background:#5046e5;color:#fff}",
+        "notes": "Pricing billing toggle; pressed segment solid indigo. Months/annual drives PRO annual = -25%."
+      }
+    }
+  }
+}
