@@ -1,3 +1,4 @@
+import { Star } from "lucide-react";
 import { TESTIMONIALS } from "../../consts";
 
 export function Testimonials() {
@@ -28,7 +29,7 @@ export function Testimonials() {
                                 {/* Rating Stars */}
                                 <div className="flex gap-1 mb-4 text-amber-400 text-sm">
                                     {[...Array(item.rating)].map((_, i) => (
-                                        <span key={i}>★</span>
+                                        <Star key={i} size={14} className="shrink-0 fill-amber-400 text-amber-400" aria-hidden="true" />
                                     ))}
                                 </div>
 

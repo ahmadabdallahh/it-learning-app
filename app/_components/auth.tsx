@@ -1,4 +1,6 @@
 import { useId, type InputHTMLAttributes, type ReactNode } from "react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 /* Shared shell + controls for the auth pages (login / register / verify-otp /
    forget-password). Class names mirror the approved HTML prototypes exactly. */
@@ -12,10 +14,19 @@ export function AuthShell({
 }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#F7F7FF] p-4 text-[#111827]">
-      <div
-        className={`w-full max-w-md rounded-2xl border border-[#E5E7EB] bg-white p-8 shadow-[0_4px_20px_rgba(80,70,229,0.04)] ${cardClassName}`}
-      >
-        {children}
+      <div className="w-full max-w-md">
+        <Link
+          href="/"
+          className="mb-4 inline-flex items-center gap-1.5 text-xs font-semibold text-[#6B7280] transition-colors hover:text-[#5046E5]"
+        >
+          <ArrowRight size={14} aria-hidden="true" />
+          العودة إلى الرئيسية
+        </Link>
+        <div
+          className={`w-full rounded-2xl border border-[#E5E7EB] bg-white p-8 shadow-[0_4px_20px_rgba(80,70,229,0.04)] ${cardClassName}`}
+        >
+          {children}
+        </div>
       </div>
     </div>
   );

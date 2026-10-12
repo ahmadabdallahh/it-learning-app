@@ -4,6 +4,7 @@ import { useRef, useState, type FormEvent, type KeyboardEvent } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
+import { ShieldCheck } from "lucide-react";
 import { resendVerification, verifyEmail } from "../lib/auth";
 import {
     AuthIconHeader,
@@ -76,7 +77,7 @@ export function VerifyOtpForm() {
     return (
         <AuthShell cardClassName="text-center">
             <AuthIconHeader
-                icon="🔒"
+                icon={<ShieldCheck size={22} aria-hidden="true" />}
                 title="أدخل كود التحقق"
                 subtitle="تم إرسال كود مكون من 6 أرقام إلى بريدك الإلكتروني"
             />

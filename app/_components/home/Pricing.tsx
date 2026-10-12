@@ -1,6 +1,8 @@
+import { Check, Star, X } from "lucide-react";
+
 export function Pricing() {
     return (
-        <div className="max-w-6xl w-full mx-auto text-center py-12">
+        <div className="max-w-6xl w-full mx-auto text-center py-12" id="pricing">
 
             {/* Header & Subtitle */}
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight mb-3">اختر الباقة اللي تناسبك</h2>
@@ -32,10 +34,10 @@ export function Pricing() {
                         <p className="text-[11px] text-[#6B7280] mb-8 font-medium">من 3 أفراد فأكثر</p>
 
                         <ul className="text-xs sm:text-sm text-[#111827] space-y-3.5 mb-8 font-medium">
-                            <li className="flex items-center gap-2"><span className="text-emerald-600 font-bold">✓</span> كل مميزات PRO</li>
-                            <li className="flex items-center gap-2"><span className="text-emerald-600 font-bold">✓</span> جروب خاص بشلتك</li>
-                            <li className="flex items-center gap-2"><span className="text-emerald-600 font-bold">✓</span> تحدي أسبوعي + جوائز</li>
-                            <li className="flex items-center gap-2"><span className="text-emerald-600 font-bold">✓</span> متابعة ولي الأمر (اختياري)</li>
+                            <li className="flex items-center gap-2"><Check size={15} strokeWidth={3} className="shrink-0 text-emerald-600" aria-hidden="true" /> كل مميزات PRO</li>
+                            <li className="flex items-center gap-2"><Check size={15} strokeWidth={3} className="shrink-0 text-emerald-600" aria-hidden="true" /> جروب خاص بشلتك</li>
+                            <li className="flex items-center gap-2"><Check size={15} strokeWidth={3} className="shrink-0 text-emerald-600" aria-hidden="true" /> تحدي أسبوعي + جوائز</li>
+                            <li className="flex items-center gap-2"><Check size={15} strokeWidth={3} className="shrink-0 text-emerald-600" aria-hidden="true" /> متابعة ولي الأمر (اختياري)</li>
                         </ul>
                     </div>
                     <button className="w-full bg-[#111827] hover:bg-slate-800 text-white font-bold py-3.5 rounded-xl transition-colors text-sm shadow-sm">
@@ -45,8 +47,8 @@ export function Pricing() {
 
                 {/* 2. الدفعة PRO (المنتصف - البارز والملون) */}
                 <div className="bg-[#5046E5] text-white p-8 rounded-3xl shadow-2xl flex flex-col justify-between relative overflow-hidden transform lg:-translate-y-4 border border-indigo-400/30">
-                    <div className="absolute top-4 left-4 bg-amber-400 text-slate-900 text-[10px] px-3 py-1 rounded-full font-black shadow-md">
-                        الأكثر اشتراكاً ★
+                    <div className="absolute top-4 left-4 inline-flex items-center gap-1 bg-amber-400 text-slate-900 text-[10px] px-3 py-1 rounded-full font-black shadow-md">
+                        الأكثر اشتراكاً <Star size={10} className="shrink-0 fill-slate-900 text-slate-900" aria-hidden="true" />
                     </div>
 
                     <div className="pt-2">
@@ -63,11 +65,11 @@ export function Pricing() {
                         <p className="text-[11px] text-indigo-200 mb-8 font-medium">أقل من 1 جنيه في اليوم • ضمان 14 يوم</p>
 
                         <ul className="text-xs sm:text-sm text-white space-y-3.5 mb-8 font-medium">
-                            <li className="flex items-center gap-2"><span className="text-amber-300 font-bold">✓</span> كل المواد الـ 6 كاملة</li>
-                            <li className="flex items-center gap-2"><span className="text-amber-300 font-bold">✓</span> بنك 3,500+ سؤال بالشرح</li>
-                            <li className="flex items-center gap-2"><span className="text-amber-300 font-bold">✓</span> 20 امتحان تجريبي بتصحيح فوري</li>
-                            <li className="flex items-center gap-2"><span className="text-amber-300 font-bold">✓</span> مذكرات PDF + خطط مذاكرة</li>
-                            <li className="flex items-center gap-2"><span className="text-amber-300 font-bold">✓</span> جروب الدفعة + دعم ليلة الامتحان</li>
+                            <li className="flex items-center gap-2"><Check size={15} strokeWidth={3} className="shrink-0 text-amber-300" aria-hidden="true" /> كل المواد الـ 6 كاملة</li>
+                            <li className="flex items-center gap-2"><Check size={15} strokeWidth={3} className="shrink-0 text-amber-300" aria-hidden="true" /> بنك 3,500+ سؤال بالشرح</li>
+                            <li className="flex items-center gap-2"><Check size={15} strokeWidth={3} className="shrink-0 text-amber-300" aria-hidden="true" /> 20 امتحان تجريبي بتصحيح فوري</li>
+                            <li className="flex items-center gap-2"><Check size={15} strokeWidth={3} className="shrink-0 text-amber-300" aria-hidden="true" /> مذكرات PDF + خطط مذاكرة</li>
+                            <li className="flex items-center gap-2"><Check size={15} strokeWidth={3} className="shrink-0 text-amber-300" aria-hidden="true" /> جروب الدفعة + دعم ليلة الامتحان</li>
                         </ul>
                     </div>
 
@@ -92,11 +94,11 @@ export function Pricing() {
                         <p className="text-[11px] text-[#6B7280] mb-8 font-medium">مجاني للأبد</p>
 
                         <ul className="text-xs sm:text-sm text-[#111827] space-y-3.5 mb-8 font-medium">
-                            <li className="flex items-center gap-2"><span className="text-emerald-600 font-bold">✓</span> 3 دروس من كل مادة</li>
-                            <li className="flex items-center gap-2"><span className="text-emerald-600 font-bold">✓</span> 100 سؤال بنك الأسئلة</li>
-                            <li className="flex items-center gap-2"><span className="text-emerald-600 font-bold">✓</span> امتحان تجريبي واحد</li>
-                            <li className="flex items-center gap-2 text-slate-300"><span className="text-slate-300">✕</span> ملخصات PDF للتحميل</li>
-                            <li className="flex items-center gap-2 text-slate-300"><span className="text-slate-300">✕</span> خطط مذاكرة مخصصة</li>
+                            <li className="flex items-center gap-2"><Check size={15} strokeWidth={3} className="shrink-0 text-emerald-600" aria-hidden="true" /> 3 دروس من كل مادة</li>
+                            <li className="flex items-center gap-2"><Check size={15} strokeWidth={3} className="shrink-0 text-emerald-600" aria-hidden="true" /> 100 سؤال بنك الأسئلة</li>
+                            <li className="flex items-center gap-2"><Check size={15} strokeWidth={3} className="shrink-0 text-emerald-600" aria-hidden="true" /> امتحان تجريبي واحد</li>
+                            <li className="flex items-center gap-2 text-slate-300"><X size={15} strokeWidth={3} className="shrink-0 text-slate-300" aria-hidden="true" /> ملخصات PDF للتحميل</li>
+                            <li className="flex items-center gap-2 text-slate-300"><X size={15} strokeWidth={3} className="shrink-0 text-slate-300" aria-hidden="true" /> خطط مذاكرة مخصصة</li>
                         </ul>
                     </div>
                     <button className="w-full bg-white border border-[#E5E7EB] text-[#111827] hover:bg-slate-50 font-bold py-3.5 rounded-xl transition-colors text-sm shadow-sm">
