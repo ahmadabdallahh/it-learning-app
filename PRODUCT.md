@@ -41,7 +41,7 @@ Confirmed functionality (shipped landing copy + the API documented in `routes.md
 Technical constraints:
 
 - Next.js 16 (App Router, server components; static landing + dynamic API routes), React Query on the client, Tailwind v4 token system, Bun.
-- **Undecided / gaps (recorded, not hidden):** the landing shows only 3 sample materials; section imagery is real Unsplash photography (verified topical: group study, study notes, Python code, server racks, web-dev desk) standing in until real course art exists; the API is a general course platform (price default USD, level/language fields) while the landing positions a cohort-specific EGP study hub. How the platform data model maps to the cohort-plan/batch concepts is undecided. Certificate generation and question-bank/mock-exam endpoints do not exist in `routes.md` (36 endpoints + health, none cover them).
+- **Undecided / gaps (recorded, not hidden):** the landing shows only 3 sample materials; section imagery is real Unsplash photography (verified topical: group study, study notes, Python code, server racks, web-dev desk) standing in until real course art exists; the API is a general course platform (price default USD, level/language fields) while the landing positions a cohort-specific EGP study hub. How the platform data model maps to the cohort-plan/batch concepts is undecided. Certificate generation, question-bank/mock-exam, and password-reset endpoints do not exist in `routes.md` (36 endpoints + health, none cover them).
 
 ## Brand Commitments
 
