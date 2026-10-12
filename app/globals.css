@@ -4,6 +4,11 @@
    IT Academy Design Tokens (light SaaS)
    Electric indigo primary on a soft lavender-white canvas.
    Deep-navy typography, white surfaces, subtle borders and shadows.
+
+   Every component consumes these via the Tailwind utilities declared in
+   `@theme inline` below (bg-canvas, text-ink, bg-primary, rounded-card,
+   shadow-card, ...). Nothing hardcodes a hex value in the component tree,
+   so the palette can be retuned from one place.
    ===================================================================== */
 
 :root {
@@ -23,7 +28,7 @@
   --line: #e5e7eb;
   --line-strong: #d1d5db;
 
-  /* Accent */
+  /* Accent (the single brand accent) */
   --primary: #5046e5;
   --primary-strong: #4338ca;
   --primary-soft: #eef0ff;
@@ -33,7 +38,8 @@
   --font-cairo: "Cairo", ui-sans-serif, system-ui, "Segoe UI", Tahoma,
     sans-serif;
 
-  /* Status */
+  /* Semantic status only: success (positive checks) + error.
+     Rating gold is applied inline where a rating is actually rendered. */
   --success: #16a34a;
   --error: #dc2626;
 
@@ -42,6 +48,42 @@
     0 12px 32px -16px rgb(17 24 39 / 0.1);
   --shadow-lift: 0 1px 2px rgb(17 24 39 / 0.05),
     0 20px 44px -20px rgb(80 70 229 / 0.28);
+}
+
+/* ---------------------------------------------------------------------
+   Dark mode: token overrides only.
+   The light values above are untouched, so the approved light identity is
+   pixel-identical. Visitors whose OS prefers dark get a tuned dark theme.
+   Delete this block to force light-only.
+   --------------------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --canvas: #0b0b13;
+    --surface: #14141e;
+    --surface-muted: #1a1a26;
+    --primary-light: #1d1d33;
+    --accent-surface: #23233c;
+
+    --ink: #f3f3f8;
+    --ink-soft: #a6a6ba;
+    --ink-faint: #74748c;
+
+    --line: #262635;
+    --line-strong: #34344b;
+
+    --primary: #6a60ee;
+    --primary-strong: #867ef4;
+    --primary-soft: #212145;
+    --primary-foreground: #ffffff;
+
+    --success: #34d399;
+    --error: #f87171;
+
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.5),
+      0 12px 32px -16px rgb(0 0 0 / 0.65);
+    --shadow-lift: 0 1px 2px rgb(0 0 0 / 0.55),
+      0 20px 44px -20px rgb(106 96 238 / 0.55);
+  }
 }
 
 @theme inline {
@@ -99,13 +141,20 @@ body {
   color: var(--primary-foreground);
 }
 
-/* Scroll reveal (driven by IntersectionObserver in a client leaf) */
+/* One visible keyboard-focus ring across the whole page. */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Scroll reveal (driven by IntersectionObserver in RevealOnScroll.tsx) */
 .reveal {
   opacity: 0;
-  transform: translateY(22px);
+  transform: translateY(20px);
   transition:
-    opacity 0.8s var(--ease-fluid),
-    transform 0.8s var(--ease-fluid);
+    opacity 0.7s var(--ease-fluid),
+    transform 0.7s var(--ease-fluid);
 }
 
 .reveal.is-visible {
@@ -133,5 +182,13 @@ body {
   * {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
+  }
+}
+
+/* If scripting is unavailable, the observer can never run: show content. */
+@media (scripting: none) {
+  .reveal {
+    opacity: 1;
+    transform: none;
   }
 }

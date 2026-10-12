@@ -19,9 +19,9 @@ import "@fontsource/cairo/latin-900.css";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-    title: "IT Academy — منصة مذاكرة أسرع 10× لدفعتك",
+    title: "IT Academy - منصة مذاكرة أسرع 10× لدفعتك",
     description:
-        "مذكرات، ملخصات، شرح فيديو، بنك أسئلة، وشهادات PDF — كل منهج كلية IT في مكان واحد.",
+        "مذكرات، ملخصات، شرح فيديو، بنك أسئلة، وشهادات PDF. كل منهج كلية IT في مكان واحد.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

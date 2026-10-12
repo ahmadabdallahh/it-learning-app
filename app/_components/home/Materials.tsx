@@ -1,59 +1,67 @@
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowLeft } from "lucide-react";
 import { MATERIALS } from "../../consts";
 
 export function Materials() {
     return (
-        <section id="materials" className="mx-auto max-w-[1120px] px-4 py-20 sm:px-6">
-            <div className="mb-12 flex items-end justify-between">
-                <div>
-                    <span className="text-xs bg-[#EEF0FF] text-[#5046E5] font-semibold px-3 py-1 rounded-full mb-3 inline-block">المحتوى الدراسي</span>
-                    <h2 className="text-2xl font-black tracking-tight text-[#111827] sm:text-3xl">
+        <section id="materials" className="reveal mx-auto max-w-280 px-4 py-20 sm:px-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                <div className="text-start">
+                    <h2 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl">
                         المواد الدراسية المتاحة
                     </h2>
-                    <p className="text-sm text-[#6B7280] sm:text-base mt-1">
-                        اختر المادة وابدأ المذاكرة فوراً بكل سهولة
+                    <p className="mt-2 text-base leading-relaxed text-ink-soft">
+                        اختر المادة وابدأ المذاكرة فوراً. كل مواد الترم الثاني
+                        مرتبة في مكان واحد.
                     </p>
                 </div>
-                <a
-                    href="#"
-                    className="text-sm font-semibold text-[#5046E5] hover:underline flex items-center gap-1"
+                <Link
+                    href="/register"
+                    className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
                 >
-                    عرض كل المواد ←
-                </a>
+                    تصفح كل المواد
+                    <ArrowLeft size={16} aria-hidden="true" />
+                </Link>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+            <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3">
                 {MATERIALS.map((material) => {
                     const Icon = material.icon;
                     return (
-                        <div
+                        <article
                             key={material.title}
-                            className="flex flex-col justify-between rounded-3xl border border-[#E5E7EB] bg-white p-7 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200"
+                            className="flex flex-col overflow-hidden rounded-card border border-line bg-surface shadow-card transition-shadow duration-200 hover:shadow-lift"
                         >
-                            <div>
-                                <div className="flex justify-between items-center mb-6">
-                                    <span className="rounded-md bg-[#EEF0FF] px-3 py-1 text-xs font-bold text-[#5046E5]">
-                                        ترم ثاني
-                                    </span>
-                                    <div className="w-11 h-11 rounded-2xl bg-[#EEF0FF] flex items-center justify-center">
-                                        <Icon size={24} className="text-[#5046E5]" aria-hidden="true" />
-                                    </div>
-                                </div>
-
-                                <h3 className="mb-3 text-base sm:text-lg font-bold text-[#111827]">
-                                    {material.title}
-                                </h3>
-                                <p className="mb-8 text-xs text-[#6B7280] font-medium leading-relaxed">
-                                    شامل المحاضرات والسكاشن وشيتات الامتحانات وأسئلة السنين السابقة.
-                                </p>
+                            <div className="relative aspect-[16/10] w-full bg-surface-muted">
+                                <Image
+                                    src={material.image}
+                                    alt=""
+                                    fill
+                                    sizes="(min-width: 640px) 33vw, 100vw"
+                                    className="object-cover"
+                                />
                             </div>
 
-                            <a
-                                href="/login"
-                                className="w-full rounded-xl bg-[#111827] py-3 text-center text-sm font-bold text-white transition-all hover:bg-[#5046E5] shadow-sm"
-                            >
-                                دخول للمادة
-                            </a>
-                        </div>
+                            <div className="flex flex-1 flex-col p-6">
+                                <span className="flex size-10 items-center justify-center rounded-control bg-primary-soft text-primary">
+                                    <Icon size={20} aria-hidden="true" />
+                                </span>
+                                <h3 className="mt-5 text-lg font-bold text-ink">
+                                    {material.title}
+                                </h3>
+                                <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-soft">
+                                    شامل المحاضرات والسكاشن وشيتات الامتحانات
+                                    وأسئلة السنين السابقة.
+                                </p>
+                                <Link
+                                    href="/login"
+                                    className="mt-6 inline-flex items-center justify-center rounded-control bg-ink px-4 py-3 text-sm font-bold text-canvas transition-colors duration-200 hover:bg-primary active:translate-y-px"
+                                >
+                                    افتح المادة
+                                </Link>
+                            </div>
+                        </article>
                     );
                 })}
             </div>

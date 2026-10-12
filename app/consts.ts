@@ -3,11 +3,14 @@ import {
     Cpu,
     Globe,
     GraduationCap,
+    ListChecks,
     MessageCircle,
     MonitorPlay,
     Network,
+    RefreshCw,
     Trophy,
     UserPlus,
+    Zap,
 } from "lucide-react";
 import type {
     Feature,
@@ -40,19 +43,16 @@ export const VALUE_CARDS: ValueCard[] = [
 export const HOW_IT_WORKS: HowItWorksStep[] = [
     {
         icon: UserPlus,
-        step: "خطوة 1",
         title: "أنشئ حسابك",
         desc: "سجل بالإيميل الجامعي أو كود الدفعة في أقل من دقيقة.",
     },
     {
         icon: BookOpen,
-        step: "خطوة 2",
         title: "اختر مادتك",
         desc: "افتح المادة وشوف المحاضرات والملخصات والشيتات.",
     },
     {
         icon: Trophy,
-        step: "خطوة 3",
         title: "ذاكر وتفوق",
         desc: "حل بنك الأسئلة وولّد شهادتك بعد إتمام المادة.",
     },
@@ -67,26 +67,38 @@ export const STATS: Stat[] = [
 
 export const FEATURES: Feature[] = [
     {
-        step: "01",
+        icon: Zap,
         title: "سرعة فائقة وتصفح سلس",
         desc: "تصفح المحاضرات والملخصات بدون أي تقطيع أو إعلانات مزعجة.",
     },
     {
-        step: "02",
+        icon: RefreshCw,
         title: "تحديثات دقيقة أول بأول",
         desc: "المحتوى بيتحدث فوراً مع كل دكتور وكل تنبيه ينزل في السكشن.",
     },
     {
-        step: "03",
+        icon: ListChecks,
         title: "بنك اسئلة الامتحانات السابقة",
         desc: "أسئلة سنين فاتت مرتبة ومنسقة مع إضافات حلول نموذجية.",
     },
 ];
 
 export const MATERIALS: Material[] = [
-    { title: "الذكاء الاصطناعي وهياكل البيانات", icon: Cpu },
-    { title: "شبكات الحاسب المتقدمة", icon: Network },
-    { title: "تطوير الويب الحديث", icon: Globe },
+    {
+        title: "الذكاء الاصطناعي وهياكل البيانات",
+        icon: Cpu,
+        image: "https://picsum.photos/seed/it-academy-data/800/500",
+    },
+    {
+        title: "شبكات الحاسب المتقدمة",
+        icon: Network,
+        image: "https://picsum.photos/seed/it-academy-networks/800/500",
+    },
+    {
+        title: "تطوير الويب الحديث",
+        icon: Globe,
+        image: "https://picsum.photos/seed/it-academy-web/800/500",
+    },
 ];
 
 export const TESTIMONIALS: Testimonial[] = [

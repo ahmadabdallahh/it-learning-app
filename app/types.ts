@@ -16,7 +16,6 @@ export type ValueCard = {
 /** Single step in the "How it works" section. */
 export type HowItWorksStep = {
     icon: LucideIcon;
-    step: string;
     title: string;
     desc: string;
 };
@@ -27,9 +26,9 @@ export type Stat = {
     label: string;
 };
 
-/** Platform feature with a numbered badge. */
+/** Platform feature (icon tile + title + supporting text). */
 export type Feature = {
-    step: string;
+    icon: LucideIcon;
     title: string;
     desc: string;
 };
@@ -38,6 +37,8 @@ export type Feature = {
 export type Material = {
     title: string;
     icon: LucideIcon;
+    /** Cover image (placeholder photography until real course art exists). */
+    image: string;
 };
 
 /** Student testimonial with a star rating. */

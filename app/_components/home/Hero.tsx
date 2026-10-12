@@ -1,58 +1,51 @@
 import Link from "next/link";
-import { VALUE_CARDS } from "../../consts";
+import Image from "next/image";
+import { ArrowLeft } from "lucide-react";
 
 export function Hero() {
     return (
-        <section className="mx-auto max-w-280 px-4 pb-16 pt-12 text-center sm:px-6">
-            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-[#5046E5]/15 bg-[#EEF0FF] px-4 py-1.5 text-xs font-semibold text-[#5046E5]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#5046E5]"></span>
-                <span>موثوقة من دفعة أولى IT كاملة</span>
-            </div>
+        <section className="mx-auto max-w-280 px-4 pb-16 pt-10 sm:px-6 lg:pt-16">
+            <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+                <div className="text-start lg:col-span-7">
+                    <h1 className="text-4xl font-extrabold leading-[1.15] tracking-tight text-ink sm:text-5xl">
+                        منصة مذاكرة أسرع{" "}
+                        <span className="text-primary">10×</span> لدفعتك
+                    </h1>
 
-            <h1 className="mb-6 text-4xl font-extrabold leading-[1.2] tracking-tight text-[#111827] sm:text-5xl lg:text-[56px]">
-                منصة مذاكرة أسرع <span className="text-[#5046E5]">10×</span> لدفعتك
-            </h1>
+                    <p className="mt-5 max-w-[52ch] text-base leading-relaxed text-ink-soft">
+                        مذكرات وملخصات وشرح فيديو وبنك أسئلة وشهادات PDF. كل منهج
+                        قسم IT في مكان واحد ومرتب.
+                    </p>
 
-            <p className="mx-auto mb-10 max-w-2xl text-sm font-normal leading-relaxed text-[#6B7280] sm:text-base">
-                ستايل SaaS فاتح ونظيف: بطاقات بيضاء ناعمة، ظلال خفيفة، وأزرار واضحة
-                لضمان أعلى تحويل وتجربة مستخدم مذهلة.
-            </p>
-
-            <div className="mb-16 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <Link
-                    href="/register"
-                    className="w-full rounded-xl bg-[#5046E5] px-7 py-3.5 font-semibold text-white shadow-md shadow-[#5046E5]/20 transition-all hover:bg-[#4338CA] sm:w-auto"
-                >
-                    استعرض المواد مجاناً
-                </Link>
-                <a
-                    href="#materials"
-                    className="w-full rounded-xl border border-[#E5E7EB] bg-white px-7 py-3.5 font-semibold text-[#111827] shadow-sm transition-all hover:bg-slate-50 sm:w-auto"
-                >
-                    شاهد الديمو
-                </a>
-            </div>
-
-            <div className="grid grid-cols-1 gap-4 text-right sm:grid-cols-2 lg:grid-cols-4">
-                {VALUE_CARDS.map((card) => {
-                    const Icon = card.icon;
-                    return (
-                        <div
-                            key={card.title}
-                            className="rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-[0_4px_20px_rgba(80,70,229,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(80,70,229,0.08)]"
+                    <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+                        <Link
+                            href="/register"
+                            className="inline-flex items-center justify-center rounded-control bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-lift transition-transform duration-200 hover:bg-primary-strong active:translate-y-px sm:text-base"
                         >
-                            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-[#EEF0FF] text-xl text-[#5046E5]">
-                                <Icon size={20} aria-hidden="true" />
-                            </div>
-                            <h3 className="mb-1 text-base font-bold text-[#111827] sm:text-lg">
-                                {card.title}
-                            </h3>
-                            <p className="text-xs font-medium text-[#6B7280] sm:text-sm">
-                                {card.desc}
-                            </p>
-                        </div>
-                    );
-                })}
+                            ابدأ مجاناً
+                        </Link>
+                        <a
+                            href="#materials"
+                            className="inline-flex items-center justify-center gap-1.5 rounded-control border border-line-strong bg-surface px-7 py-3.5 text-sm font-semibold text-ink transition-colors duration-200 hover:bg-surface-muted active:translate-y-px sm:text-base"
+                        >
+                            تصفح المواد
+                            <ArrowLeft size={16} aria-hidden="true" />
+                        </a>
+                    </div>
+                </div>
+
+                <div className="lg:col-span-5">
+                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-card border border-line bg-surface-muted shadow-lift">
+                        <Image
+                            src="https://picsum.photos/seed/it-academy-hero/1200/900"
+                            alt="طلاب قسم IT يذاكرون معاً على منصة IT Academy"
+                            fill
+                            priority
+                            sizes="(min-width: 1024px) 40vw, 100vw"
+                            className="object-cover"
+                        />
+                    </div>
+                </div>
             </div>
         </section>
     );

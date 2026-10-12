@@ -1,18 +1,22 @@
 import { STATS } from "../../consts";
 
+/** Bare metrics band: hairline separators, no card wrapper. */
 export function Stats() {
     return (
-        <section className="mx-auto max-w-280 px-4 pb-20 sm:px-6">
-            <div className="grid grid-cols-2 gap-6 rounded-2xl border border-[#E5E7EB] bg-white p-8 text-center shadow-sm sm:grid-cols-4">
+        <section
+            aria-label="أرقام المنصة"
+            className="reveal border-y border-line bg-surface"
+        >
+            <div className="mx-auto grid max-w-280 grid-cols-2 gap-y-10 px-4 py-12 sm:grid-cols-4 sm:divide-x sm:divide-line sm:px-6">
                 {STATS.map((stat) => (
-                    <div key={stat.label}>
+                    <div key={stat.label} className="px-2 text-center sm:px-6">
                         <p
                             dir="ltr"
-                            className="text-3xl font-extrabold tracking-tight text-[#5046E5]"
+                            className="text-3xl font-extrabold tracking-tight text-primary sm:text-4xl"
                         >
                             {stat.value}
                         </p>
-                        <p className="mt-1 text-xs font-medium text-[#6B7280] sm:text-sm">
+                        <p className="mt-1.5 text-sm font-medium text-ink-soft">
                             {stat.label}
                         </p>
                     </div>

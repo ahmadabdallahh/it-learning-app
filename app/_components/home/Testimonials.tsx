@@ -1,55 +1,73 @@
 import { Star } from "lucide-react";
 import { TESTIMONIALS } from "../../consts";
 
+const AVATAR_TONES = ["bg-primary text-primary-foreground", "bg-ink text-canvas"];
+
 export function Testimonials() {
     return (
         <section
             id="testimonials"
-            className="border-t border-[#E5E7EB] bg-white py-20 relative overflow-hidden"
+            className="reveal border-y border-line bg-surface py-20"
         >
-            <div className="mx-auto max-w-280 px-4 text-center sm:px-6">
-
-                {/* Heading & Subtitle */}
-                <div className="mb-14">
-                    <span className="text-xs bg-[#EEF0FF] text-[#5046E5] font-semibold px-3 py-1 rounded-full mb-3 inline-block">آراء الطلاب</span>
-                    <h2 className="text-2xl font-black tracking-tight text-[#111827] sm:text-3xl">
+            <div className="mx-auto max-w-280 px-4 sm:px-6">
+                <div className="mx-auto max-w-2xl text-center">
+                    <span className="inline-block rounded-full bg-primary-soft px-3 py-1 text-xs font-semibold text-primary">
+                        آراء الطلاب
+                    </span>
+                    <h2 className="mt-4 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
                         رأي دُفعتنا في المنصة
                     </h2>
-                    <p className="text-sm text-[#6B7280] mt-2">قصص نجاح حقيقية من طلاب بيستفيدوا من المنصة كل يوم</p>
+                    <p className="mt-2 text-base leading-relaxed text-ink-soft">
+                        قصص نجاح حقيقية من طلاب بيستفيدوا من المنصة كل يوم.
+                    </p>
                 </div>
 
-                {/* Grid */}
-                <div className="grid grid-cols-1 gap-8 text-right md:grid-cols-2">
-                    {TESTIMONIALS.map((item) => (
-                        <div
+                <div className="mx-auto mt-14 grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
+                    {TESTIMONIALS.map((item, index) => (
+                        <figure
                             key={item.name}
-                            className="relative rounded-3xl border border-[#E5E7EB] bg-[#F7F7FF] p-8 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between"
+                            className="flex flex-col justify-between rounded-card border border-line bg-canvas p-8 shadow-card"
                         >
                             <div>
-                                {/* Rating Stars */}
-                                <div className="flex gap-1 mb-4 text-amber-400 text-sm">
-                                    {[...Array(item.rating)].map((_, i) => (
-                                        <Star key={i} size={14} className="shrink-0 fill-amber-400 text-amber-400" aria-hidden="true" />
-                                    ))}
+                                <div
+                                    className="flex gap-1 text-amber-400"
+                                    role="img"
+                                    aria-label={`${item.rating} من 5`}
+                                >
+                                    {Array.from({ length: item.rating }).map(
+                                        (_, i) => (
+                                            <Star
+                                                key={i}
+                                                size={15}
+                                                className="shrink-0 fill-amber-400 text-amber-400"
+                                                aria-hidden="true"
+                                            />
+                                        ),
+                                    )}
                                 </div>
 
-                                <p className="mb-6 text-sm sm:text-base leading-relaxed text-[#111827] font-medium">
-                                    &quot;{item.quote}&quot;
-                                </p>
+                                <blockquote className="mt-5 text-base font-medium leading-relaxed text-ink">
+                                    {item.quote}
+                                </blockquote>
                             </div>
 
-                            <div className="flex items-center gap-3 pt-4 border-t border-[#E5E7EB]/60">
-                                <div className="w-10 h-10 rounded-full bg-[#5046E5] text-white font-bold flex items-center justify-center text-sm shadow-sm">
+                            <figcaption className="mt-6 flex items-center gap-3 border-t border-line pt-5">
+                                <span
+                                    className={`flex size-10 items-center justify-center rounded-full text-sm font-bold ${AVATAR_TONES[index % AVATAR_TONES.length]}`}
+                                    aria-hidden="true"
+                                >
                                     {item.name.charAt(0)}
-                                </div>
-                                <div>
-                                    <span className="block text-sm font-bold text-[#111827]">
+                                </span>
+                                <span>
+                                    <span className="block text-sm font-bold text-ink">
                                         {item.name}
                                     </span>
-                                    <span className="text-xs text-[#6B7280] font-medium">{item.level}</span>
-                                </div>
-                            </div>
-                        </div>
+                                    <span className="text-xs font-medium text-ink-soft">
+                                        {item.level}
+                                    </span>
+                                </span>
+                            </figcaption>
+                        </figure>
                     ))}
                 </div>
             </div>
