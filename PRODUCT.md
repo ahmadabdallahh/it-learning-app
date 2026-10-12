@@ -28,7 +28,7 @@ Whole-batch curriculum in one place: every subject of the cohort's IT program or
 
 ## Capabilities and Constraints
 
-Confirmed functionality (shipped landing copy + the API documented in `routes.txt`):
+Confirmed functionality (shipped landing copy + the API documented in `routes.md`):
 
 - **Auth:** register (username/email/password), OTP email verification and resend, login/logout via HTTP-only session cookie, `GET /me`.
 - **Role dashboards:** after login the session role routes each user to their own home (`/dashboard/student`, `/dashboard/instructor`, `/dashboard/admin`); `/dashboard` resolves the role server-side. Verified registration lands on login with a success notice.
@@ -41,7 +41,7 @@ Confirmed functionality (shipped landing copy + the API documented in `routes.tx
 Technical constraints:
 
 - Next.js 16 (App Router, server components; static landing + dynamic API routes), React Query on the client, Tailwind v4 token system, Bun.
-- **Undecided / gaps (recorded, not hidden):** the landing shows only 3 sample materials; section imagery is real Unsplash photography (verified topical: group study, study notes, Python code, server racks, web-dev desk) standing in until real course art exists; the API is a general course platform (price default USD, level/language fields) while the landing positions a cohort-specific EGP study hub. How the platform data model maps to the cohort-plan/batch concepts is undecided. Certificate generation and question-bank/mock-exam endpoints are not yet visible in `routes.txt`.
+- **Undecided / gaps (recorded, not hidden):** the landing shows only 3 sample materials; section imagery is real Unsplash photography (verified topical: group study, study notes, Python code, server racks, web-dev desk) standing in until real course art exists; the API is a general course platform (price default USD, level/language fields) while the landing positions a cohort-specific EGP study hub. How the platform data model maps to the cohort-plan/batch concepts is undecided. Certificate generation and question-bank/mock-exam endpoints do not exist in `routes.md` (36 endpoints + health, none cover them).
 
 ## Brand Commitments
 
@@ -53,7 +53,7 @@ Technical constraints:
 ## Evidence on Hand
 
 - **User-confirmed real facts:** pricing (99 groups / 149 PRO per term / 0 free, 249 strikethrough, -25% year), stats (+2000 students, +300 videos, +5000 Q&A, 98% satisfaction), testimonials (two named cohort students above), and 3 sample materials (الذكاء الاصطناعي وهياكل البيانات, شبكات الحاسب المتقدمة, تطوير الويب الحديث).
-- `routes.txt` documents the full API surface: health, auth, users, categories, courses, sections, lessons, enrollments, progress.
+- `routes.md` documents the full API surface (36 endpoints + health): auth, users, categories, courses, sections, lessons, enrollments, progress. The frontend currently consumes the 6 auth endpoints; the rest are unwired.
 - **Absences that must not be fabricated:** the full material catalog (only 3 samples exist), real course artwork and photography, certificate/question-bank API endpoints, verified annual/group pricing beyond the advertised figures, and any user counts beyond the stats above.
 
 ## Product Principles

@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import { forwardSetCookies, proxyToBackend } from "@/app/lib/backend";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const CODE_PATTERN = /^\d{6}$/;
+/* Backend accepts 4-10 chars (routes.md); the UI always sends 6 digits. */
+const CODE_PATTERN = /^\d{4,10}$/;
 
 export async function POST(request: Request) {
     let payload: { email?: unknown; code?: unknown };
@@ -27,7 +28,7 @@ export async function POST(request: Request) {
     }
     if (!CODE_PATTERN.test(code)) {
         return NextResponse.json(
-            { message: "كود التحقق يجب أن يكون 6 أرقام." },
+            { message: "كود التحقق يجب أن يكون من 4 إلى 10 أرقام." },
             { status: 400 },
         );
     }
