@@ -4,7 +4,7 @@ Base URL: `/api/v1` (health check at `GET /health`)
 Format: JSON
 Auth: HTTP-only session cookie (see `SESSION_COOKIE_NAME`, default `session`). Send with `credentials: "include"`.
 
-Source of truth: `app.js` + `src/routes/*.js` + `src/validators/*.js`.
+Source of truth: `app.js` + `src/routes/*.js` https://it-learniing-app.vercel.app/+ `src/validators/*.js`.
 - IDs are PostgreSQL `BIGINT` and are always **strings** (e.g. `"12"`), in params, query, and bodies.
 - Pagination: `?page=1&limit=20` (limit max 100). Paginated responses include `{ data, pagination: { page, limit, total, totalPages } }`.
 - Success envelope: `{ status, success: true, data }`. Created resources return `201`.
