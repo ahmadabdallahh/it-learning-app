@@ -3,6 +3,10 @@ import { forwardSetCookies, proxyToBackend } from "@/app/lib/backend";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_PASSWORD_LENGTH = 8;
+/* Mirrors the backend validator (routes.md): 3-50 chars, латин letters,
+   numbers, underscores, hyphens. Enforced locally so the user gets an
+   Arabic message instead of a backend 400. */
+const USERNAME_PATTERN = /^[a-zA-Z0-9_-]{3,50}$/;
 
 export async function POST(request: Request) {
     let payload: { username?: unknown; email?: unknown; password?: unknown };
@@ -22,9 +26,13 @@ export async function POST(request: Request) {
     const password =
         typeof payload.password === "string" ? payload.password : "";
 
-    if (!username) {
+    if (!USERNAME_PATTERN.test(username)) {
         return NextResponse.json(
-            { field: "username", message: "من فضلك أدخل الاسم الكامل." },
+            {
+                field: "username",
+                message:
+                    "اسم المستخدم من 3 إلى 50 حرفًا بالإنجليزية أو الأرقام أو _ أو - فقط.",
+            },
             { status: 400 },
         );
     }

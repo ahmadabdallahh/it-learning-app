@@ -47,10 +47,10 @@ export default function RegisterPage() {
                     <Alert>{errorMessage}</Alert>
                 ) : null}
                 <Field
-                    label="الاسم الكامل"
+                    label="اسم المستخدم"
                     name="username"
                     type="text"
-                    placeholder="أحمد محمد"
+                    placeholder="ahmad_IT"
                     autoComplete="username"
                     required
                     value={username}
