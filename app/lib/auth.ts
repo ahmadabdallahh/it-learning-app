@@ -61,7 +61,17 @@ export type ResendVerificationResponse = {
 type ApiErrorPayload = {
     field?: string;
     message?: string;
+    /** The platform backend nests failures as { error: { code, message } }. */
+    error?: { code?: string; message?: string };
 };
+
+/** Prefer the backend's own message, whatever envelope it arrives in. */
+function apiErrorMessage(
+    data: ApiErrorPayload | null,
+    fallback: string,
+): string {
+    return data?.message ?? data?.error?.message ?? fallback;
+}
 
 /**
  * Shared POST helper for the same-origin /api/v1 JSON endpoints.
@@ -87,7 +97,7 @@ async function postJson<T>(path: string, body: unknown): Promise<T> {
             .json()
             .catch(() => null)) as ApiErrorPayload | null;
         throw new Error(
-            data?.message ?? "حدث خطأ غير متوقع، حاول مرة أخرى.",
+            apiErrorMessage(data, "حدث خطأ غير متوقع، حاول مرة أخرى."),
         );
     }
 
@@ -112,7 +122,7 @@ async function getJson<T>(path: string): Promise<T> {
             .json()
             .catch(() => null)) as ApiErrorPayload | null;
         throw new Error(
-            data?.message ?? "حدث خطأ غير متوقع، حاول مرة أخرى.",
+            apiErrorMessage(data, "حدث خطأ غير متوقع، حاول مرة أخرى."),
         );
     }
 

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { forwardSetCookies, proxyToBackend } from "@/app/lib/backend";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const CODE_PATTERN = /^\d{6}$/;
@@ -31,8 +32,34 @@ export async function POST(request: Request) {
         );
     }
 
-    // TODO: verify the code against the platform API
-    // (POST /api/v1/auth/verify-email) and establish the session.
-    // Stub response until then.
-    return NextResponse.json({ verified: true });
+    // Verify the code against the platform API. A wrong/expired code
+    // comes back as a backend 4xx, which the client surfaces as-is.
+    let backendResponse: Response;
+    try {
+        backendResponse = await proxyToBackend("auth/verify-email", {
+            method: "POST",
+            body: { email, code },
+        });
+    } catch (error) {
+        return NextResponse.json(
+            {
+                message:
+                    error instanceof Error
+                        ? error.message
+                        : "حدث خطأ غير متوقع، حاول مرة أخرى.",
+            },
+            { status: 502 },
+        );
+    }
+
+    const data = (await backendResponse.json().catch(() => null)) as Record<
+        string,
+        unknown
+    > | null;
+    const headers = new Headers();
+    forwardSetCookies(backendResponse, headers);
+    return NextResponse.json(data ?? {}, {
+        status: backendResponse.status,
+        headers,
+    });
 }

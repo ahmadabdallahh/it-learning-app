@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { forwardSetCookies, proxyToBackend } from "@/app/lib/backend";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MIN_PASSWORD_LENGTH = 8;
@@ -43,10 +44,34 @@ export async function POST(request: Request) {
         );
     }
 
-    // TODO: create the user via the platform API (hash the password, then
-    // send the 6-digit OTP email). Stub response until then.
-    return NextResponse.json(
-        { user: { id: crypto.randomUUID(), username, email } },
-        { status: 201 },
-    );
+    // Create the user via the platform API, which hashes the password
+    // and sends the 6-digit OTP email.
+    let backendResponse: Response;
+    try {
+        backendResponse = await proxyToBackend("auth/register", {
+            method: "POST",
+            body: { username, email, password },
+        });
+    } catch (error) {
+        return NextResponse.json(
+            {
+                message:
+                    error instanceof Error
+                        ? error.message
+                        : "حدث خطأ غير متوقع، حاول مرة أخرى.",
+            },
+            { status: 502 },
+        );
+    }
+
+    const data = (await backendResponse.json().catch(() => null)) as Record<
+        string,
+        unknown
+    > | null;
+    const headers = new Headers();
+    forwardSetCookies(backendResponse, headers);
+    return NextResponse.json(data ?? {}, {
+        status: backendResponse.status,
+        headers,
+    });
 }
