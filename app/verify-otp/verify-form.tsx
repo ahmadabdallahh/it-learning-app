@@ -29,7 +29,7 @@ export function VerifyOtpForm() {
 
     const verify = useMutation({
         mutationFn: verifyEmail,
-        onSuccess: () => router.push("/login"),
+        onSuccess: () => router.push("/login?verified=1"),
     });
     const resend = useMutation({ mutationFn: resendVerification });
 

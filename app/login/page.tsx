@@ -1,51 +1,22 @@
 import type { Metadata } from "next";
-import {
-  AuthBrandHeader,
-  AuthFooterLink,
-  AuthShell,
-  Field,
-  SubmitButton,
-} from "../_components/auth";
+import { Suspense } from "react";
+import { AuthShell } from "../_components/auth";
+import { LoginForm } from "./login-form";
 
 export const metadata: Metadata = {
-  title: "تسجيل الدخول - IT Academy",
+    title: "تسجيل الدخول - IT Academy",
 };
 
 export default function LoginPage() {
-  return (
-    <AuthShell>
-      <AuthBrandHeader
-        title="مرحباً بك مجدداً"
-        subtitle="سجل الدخول للمتابعة إلى منصة المذاكرة"
-      />
-
-      <form className="space-y-4">
-        <Field
-          label="البريد الإلكتروني أو كود الدفعة"
-          type="text"
-          placeholder="name@example.com"
-        />
-        <Field
-          label="كلمة المرور"
-          type="password"
-          placeholder="••••••••"
-          aside={
-            <a
-              href="/forget-password"
-              className="text-xs text-primary hover:underline"
-            >
-              نسيت كلمة المرور؟
-            </a>
-          }
-        />
-        <SubmitButton>تسجيل الدخول</SubmitButton>
-      </form>
-
-      <AuthFooterLink
-        text="ليس لديك حساب؟"
-        linkText="انشئ حساباً الآن"
-        href="/register"
-      />
-    </AuthShell>
-  );
+    return (
+        <Suspense
+            fallback={
+                <AuthShell cardClassName="text-center">
+                    <p className="text-xs text-ink-soft">جاري التحميل...</p>
+                </AuthShell>
+            }
+        >
+            <LoginForm />
+        </Suspense>
+    );
 }
